@@ -1,0 +1,357 @@
+[gd_scene load_steps=22 format=2]
+
+[ext_resource path="res://main_theme.tres" type="Theme" id=1]
+[ext_resource path="res://Editor.gd" type="Script" id=2]
+[ext_resource path="res://Worlds/WorldViewer.gd" type="Script" id=3]
+[ext_resource path="res://Graphics/png/sword_square.png" type="Texture" id=4]
+[ext_resource path="res://CodingUI/CodeBlockShelf/ShelfBlock.gd" type="Script" id=5]
+[ext_resource path="res://Graphics/png/hadamard_square.png" type="Texture" id=6]
+[ext_resource path="res://Graphics/png/timid_scout_square.png" type="Texture" id=7]
+[ext_resource path="res://Graphics/png/confindent_scout_square.png" type="Texture" id=8]
+[ext_resource path="res://Graphics/png/oracle_square.png" type="Texture" id=9]
+[ext_resource path="res://CodingUI/CodeArea/HeaderColumn.gd" type="Script" id=10]
+[ext_resource path="res://CodingUI/CodeArea/CodeColumns.gd" type="Script" id=11]
+[ext_resource path="res://CodingUI/CodeArea/FooterColumn.gd" type="Script" id=12]
+
+[sub_resource type="Shader" id=1]
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+content_margin_left = 5.0
+content_margin_right = 5.0
+content_margin_top = 5.0
+content_margin_bottom = 5.0
+bg_color = Color( 0.12549, 0.211765, 0.172549, 1 )
+
+[sub_resource type="Shader" id=4]
+code = "shader_type canvas_item;
+
+void fragment() {
+    vec3 c = textureLod(SCREEN_TEXTURE, SCREEN_UV, 0.0).rgb;
+	vec3 p = vec3(max(c.r, 0.5) - 0.5, max(c.g, 0.5) - 0.5, max(c.b, 0.5) - 0.5);
+	vec3 n = vec3(0.5 - min(c.r, 0.5), 0.5 - min(c.g, 0.5), 0.5 - min(c.b, 0.5));
+	vec3 d = vec3(p.r + n.g*0.5 + n.b*0.5, p.g + n.r*0.5 + n.b*0.5, p.b + n.r*0.5 + n.g*0.5);
+	d = d + d;
+    COLOR.rgb = d;
+}"
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = SubResource( 4 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+content_margin_left = 0.0
+content_margin_right = 0.0
+content_margin_top = 0.0
+content_margin_bottom = 0.0
+bg_color = Color( 0.12549, 0.211765, 0.172549, 1 )
+shadow_color = Color( 0.12549, 0.211765, 0.172549, 1 )
+
+[sub_resource type="StyleBoxFlat" id=7]
+content_margin_left = 5.0
+content_margin_right = 5.0
+content_margin_top = 5.0
+content_margin_bottom = 5.0
+bg_color = Color( 0.0709534, 0.117188, 0.096172, 1 )
+
+[sub_resource type="StyleBoxFlat" id=8]
+content_margin_left = 5.0
+content_margin_right = 5.0
+content_margin_top = 5.0
+content_margin_bottom = 5.0
+draw_center = false
+
+[sub_resource type="StyleBoxFlat" id=9]
+content_margin_left = 5.0
+content_margin_right = 5.0
+content_margin_top = 5.0
+content_margin_bottom = 5.0
+draw_center = false
+
+[node name="Editor" type="ColorRect"]
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+color = Color( 0.0470588, 0.0784314, 0.0627451, 1 )
+
+[node name="Main" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 0
+script = ExtResource( 2 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Main"]
+margin_right = 1024.0
+margin_bottom = 572.0
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="Main/HBoxContainer"]
+margin_right = 240.0
+margin_bottom = 572.0
+rect_min_size = Vector2( 240, 0 )
+custom_styles/panel = SubResource( 3 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Main/HBoxContainer/PanelContainer"]
+editor/display_folded = true
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 235.0
+margin_bottom = 567.0
+alignment = 2
+
+[node name="Label" type="Label" parent="Main/HBoxContainer/PanelContainer/VBoxContainer"]
+margin_right = 230.0
+margin_bottom = 534.0
+size_flags_vertical = 3
+text = "I have a 10 year old son. He has words. He is so good with these words it's unbelievable. We are going to make placeholder text great again. Greater than ever before.
+
+He’s not a word hero. He’s a word hero because he was captured. I like text that wasn’t captured. Lorem Ipsum is unattractive, both inside and out. I fully understand why it’s former users left it for something else. They made a good decision. I think the only difference between me and the other placeholder text is that I’m more honest and my words are more beautiful. If Trump Ipsum weren’t my own words, perhaps I’d be dating it."
+autowrap = true
+
+[node name="ReturnButton" type="Button" parent="Main/HBoxContainer/PanelContainer/VBoxContainer"]
+margin_top = 538.0
+margin_right = 230.0
+margin_bottom = 562.0
+text = "Return to Level Select Screen"
+
+[node name="WorldViewerContainer" type="Control" parent="Main/HBoxContainer"]
+margin_left = 244.0
+margin_right = 1024.0
+margin_bottom = 572.0
+size_flags_horizontal = 3
+
+[node name="WorldViewer" type="ColorRect" parent="Main/HBoxContainer/WorldViewerContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color( 0.482353, 0.517647, 0.482353, 1 )
+script = ExtResource( 3 )
+
+[node name="Shader" type="ColorRect" parent="Main/HBoxContainer/WorldViewerContainer"]
+material = SubResource( 5 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="CodeArea" type="PanelContainer" parent="Main"]
+margin_top = 572.0
+margin_right = 1024.0
+margin_bottom = 700.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+custom_styles/panel = SubResource( 6 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Main/CodeArea"]
+margin_right = 1024.0
+margin_bottom = 128.0
+custom_constants/separation = 5
+
+[node name="CodeBlockShelf" type="PanelContainer" parent="Main/CodeArea/VBoxContainer"]
+margin_right = 1024.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 0, 60 )
+custom_styles/panel = SubResource( 7 )
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Main/CodeArea/VBoxContainer/CodeBlockShelf"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 1019.0
+margin_bottom = 55.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Main/CodeArea/VBoxContainer/CodeBlockShelf/HBoxContainer2"]
+margin_right = 845.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+custom_constants/separation = 10
+alignment = 1
+
+[node name="VSeparator2" type="VSeparator" parent="Main/CodeArea/VBoxContainer/CodeBlockShelf/HBoxContainer2/HBoxContainer"]
+margin_left = 256.0
+margin_right = 260.0
+margin_bottom = 50.0
+
+[node name="Button" type="TextureButton" parent="Main/CodeArea/VBoxContainer/CodeBlockShelf/HBoxContainer2/HBoxContainer"]
+margin_left = 270.0
+margin_right = 320.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+action_mode = 0
+texture_normal = ExtResource( 4 )
+script = ExtResource( 5 )
+
+[node name="Button3" type="TextureButton" parent="Main/CodeArea/VBoxContainer/CodeBlockShelf/HBoxContainer2/HBoxContainer"]
+margin_left = 330.0
+margin_right = 380.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture_normal = ExtResource( 6 )
+script = ExtResource( 5 )
+dragging_id = 1
+
+[node name="VSeparator" type="VSeparator" parent="Main/CodeArea/VBoxContainer/CodeBlockShelf/HBoxContainer2/HBoxContainer"]
+margin_left = 390.0
+margin_right = 394.0
+margin_bottom = 50.0
+
+[node name="Button4" type="TextureButton" parent="Main/CodeArea/VBoxContainer/CodeBlockShelf/HBoxContainer2/HBoxContainer"]
+margin_left = 404.0
+margin_right = 454.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture_normal = ExtResource( 7 )
+script = ExtResource( 5 )
+dragging_id = 2
+
+[node name="Button2" type="TextureButton" parent="Main/CodeArea/VBoxContainer/CodeBlockShelf/HBoxContainer2/HBoxContainer"]
+margin_left = 464.0
+margin_right = 514.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture_normal = ExtResource( 8 )
+script = ExtResource( 5 )
+dragging_id = 3
+
+[node name="Button5" type="TextureButton" parent="Main/CodeArea/VBoxContainer/CodeBlockShelf/HBoxContainer2/HBoxContainer"]
+margin_left = 524.0
+margin_right = 574.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture_normal = ExtResource( 9 )
+script = ExtResource( 5 )
+dragging_id = 4
+
+[node name="VSeparator3" type="VSeparator" parent="Main/CodeArea/VBoxContainer/CodeBlockShelf/HBoxContainer2/HBoxContainer"]
+margin_left = 584.0
+margin_right = 588.0
+margin_bottom = 50.0
+
+[node name="CompleteLevelButton" type="Button" parent="Main/CodeArea/VBoxContainer/CodeBlockShelf/HBoxContainer2"]
+margin_left = 849.0
+margin_right = 1014.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 165, 0 )
+disabled = true
+text = "Complete Level"
+flat = true
+
+[node name="PanelContainer" type="PanelContainer" parent="Main/CodeArea/VBoxContainer"]
+margin_top = 65.0
+margin_right = 1024.0
+margin_bottom = 113.0
+custom_styles/panel = SubResource( 8 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Main/CodeArea/VBoxContainer/PanelContainer"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 1019.0
+margin_bottom = 43.0
+size_flags_horizontal = 3
+
+[node name="HeaderColumn" type="PanelContainer" parent="Main/CodeArea/VBoxContainer/PanelContainer/HBoxContainer"]
+margin_right = 36.0
+margin_bottom = 38.0
+custom_styles/panel = SubResource( 9 )
+script = ExtResource( 10 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Main/CodeArea/VBoxContainer/PanelContainer/HBoxContainer/HeaderColumn"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 31.0
+margin_bottom = 33.0
+
+[node name="Button" type="Button" parent="Main/CodeArea/VBoxContainer/PanelContainer/HBoxContainer/HeaderColumn/VBoxContainer"]
+margin_right = 26.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+toggle_mode = true
+pressed = true
+text = "[o]"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Main/CodeArea/VBoxContainer/PanelContainer/HBoxContainer/HeaderColumn/VBoxContainer"]
+margin_top = 28.0
+margin_right = 26.0
+margin_bottom = 28.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Main/CodeArea/VBoxContainer/PanelContainer/HBoxContainer"]
+editor/display_folded = true
+margin_left = 40.0
+margin_right = 842.0
+margin_bottom = 38.0
+size_flags_horizontal = 3
+scroll_vertical_enabled = false
+
+[node name="CodeColumns" type="HBoxContainer" parent="Main/CodeArea/VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer"]
+margin_right = 802.0
+size_flags_horizontal = 3
+custom_constants/separation = 5
+script = ExtResource( 11 )
+
+[node name="FooterColumn" type="PanelContainer" parent="Main/CodeArea/VBoxContainer/PanelContainer/HBoxContainer"]
+margin_left = 846.0
+margin_right = 1014.0
+margin_bottom = 38.0
+custom_styles/panel = SubResource( 7 )
+script = ExtResource( 12 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Main/CodeArea/VBoxContainer/PanelContainer/HBoxContainer/FooterColumn"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 163.0
+margin_bottom = 33.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Main/CodeArea/VBoxContainer/PanelContainer/HBoxContainer/FooterColumn/VBoxContainer"]
+margin_right = 158.0
+margin_bottom = 14.0
+
+[node name="Button" type="Label" parent="Main/CodeArea/VBoxContainer/PanelContainer/HBoxContainer/FooterColumn/VBoxContainer/HBoxContainer"]
+margin_right = 50.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 50, 0 )
+size_flags_horizontal = 3
+text = "Death"
+align = 1
+
+[node name="Button2" type="Label" parent="Main/CodeArea/VBoxContainer/PanelContainer/HBoxContainer/FooterColumn/VBoxContainer/HBoxContainer"]
+margin_left = 54.0
+margin_right = 104.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 50, 0 )
+size_flags_horizontal = 3
+text = "Goal"
+align = 1
+
+[node name="Button3" type="Label" parent="Main/CodeArea/VBoxContainer/PanelContainer/HBoxContainer/FooterColumn/VBoxContainer/HBoxContainer"]
+margin_left = 108.0
+margin_right = 158.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 50, 0 )
+size_flags_horizontal = 3
+align = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Main/CodeArea/VBoxContainer/PanelContainer/HBoxContainer/FooterColumn/VBoxContainer"]
+margin_top = 18.0
+margin_right = 158.0
+margin_bottom = 18.0
+
+[node name="Panel" type="PanelContainer" parent="Main/CodeArea/VBoxContainer"]
+margin_top = 118.0
+margin_right = 1024.0
+margin_bottom = 128.0
+custom_styles/panel = SubResource( 7 )
+
+[connection signal="button_up" from="Main/HBoxContainer/PanelContainer/VBoxContainer/ReturnButton" to="Main" method="on_return_to_level_select"]
+[connection signal="button_up" from="Main/CodeArea/VBoxContainer/CodeBlockShelf/HBoxContainer2/CompleteLevelButton" to="Main" method="on_level_complete"]

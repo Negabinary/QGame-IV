@@ -1,0 +1,7 @@
+[gd_resource type="StreamTexture" format=2]
+
+[resource]
+
+flags = 4
+load_path = "res://.import/hadamard_square.png-e7e1c568434211e4a328e8c84255f4d0.stex"
+

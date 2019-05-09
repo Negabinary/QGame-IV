@@ -1,0 +1,66 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://CodingUI/CodeBlockMouseFollower.gd" type="Script" id=1]
+[ext_resource path="res://CodingUI/BlockTextures/HadamardBlock.tres" type="Texture" id=2]
+[ext_resource path="res://CodingUI/BlockTextures/TimidScoutBlock.tres" type="Texture" id=3]
+[ext_resource path="res://CodingUI/BlockTextures/ConfidentScoutBlock.tres" type="Texture" id=4]
+
+[sub_resource type="StreamTexture" id=1]
+
+flags = 4
+load_path = "res://.import/sword_square.png-00957e5ec9ece05139d09c01875a51a5.stex"
+
+[sub_resource type="StreamTexture" id=2]
+
+flags = 4
+load_path = "res://.import/oracle_square.png-0180fd4d8cb6c1d740a0b2a11d9cdb08.stex"
+
+[node name="MouseFollower" type="Control" groups=[
+"code_block_mouse_follower",
+]]
+
+visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+script = ExtResource( 1 )
+_sections_unfolded = [ "Rect", "Textures" ]
+
+[node name="Sprite" type="Sprite" parent="." index="0"]
+
+visible = false
+texture = SubResource( 1 )
+_sections_unfolded = [ "Material", "Rect", "Textures", "Transform" ]
+
+[node name="Sprite2" type="Sprite" parent="." index="1"]
+
+visible = false
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Rect", "Textures", "Transform" ]
+
+[node name="Sprite3" type="Sprite" parent="." index="2"]
+
+visible = false
+texture = ExtResource( 3 )
+_sections_unfolded = [ "Rect", "Textures", "Transform" ]
+
+[node name="Sprite4" type="Sprite" parent="." index="3"]
+
+visible = false
+texture = ExtResource( 4 )
+_sections_unfolded = [ "Rect", "Textures", "Transform" ]
+
+[node name="Sprite5" type="Sprite" parent="." index="4"]
+
+visible = false
+texture = SubResource( 2 )
+_sections_unfolded = [ "Rect", "Textures", "Transform" ]
+
+

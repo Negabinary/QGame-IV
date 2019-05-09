@@ -1,0 +1,84 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Reference",
+"class": "Actions",
+"language": "GDScript",
+"path": "res://QuantumState/Actions.gd"
+}, {
+"base": "Object",
+"class": "GateBuilder",
+"language": "GDScript",
+"path": "res://QuantumState/Matrix/GateBuilder.gd"
+}, {
+"base": "Object",
+"class": "SparseMatrix",
+"language": "GDScript",
+"path": "res://QuantumState/Matrix/SparseMatrix.gd"
+}, {
+"base": "Reference",
+"class": "StateVector",
+"language": "GDScript",
+"path": "res://QuantumState/StateVector.gd"
+}, {
+"base": "Reference",
+"class": "TimeState",
+"language": "GDScript",
+"path": "res://QuantumState/TimeState.gd"
+} ]
+_global_script_class_icons={
+"Actions": "",
+"GateBuilder": "",
+"SparseMatrix": "",
+"StateVector": "",
+"TimeState": ""
+}
+
+[application]
+
+config/name="QGame-IV"
+run/main_scene="res://Main.tscn"
+config/icon="res://icon.png"
+
+[debug]
+
+gdscript/warnings/enable=false
+
+[display]
+
+window/size/height=700
+
+[editor_plugins]
+
+enabled=PoolStringArray( "gut", "todo" )
+
+[input]
+
+left_click={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+toggle_fullscreen={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777254,"unicode":0,"echo":false,"script":null)
+ ]
+}
+quit={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777217,"unicode":0,"echo":false,"script":null)
+ ]
+}
+
+[rendering]
+
+quality/intended_usage/framebuffer_allocation=0
+quality/intended_usage/framebuffer_allocation.mobile=0

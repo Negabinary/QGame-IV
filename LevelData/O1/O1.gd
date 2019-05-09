@@ -23,10 +23,6 @@ var initial_state_vector = PoolVector2Array([
 	Vector2(0,0), Vector2(0,0), Vector2(0,0), Vector2(0,0),
 ])
 
-var initial_mosaic_tree = [[0, 1], [2, 3]]
-
-var intitial_mosaic_map = [0, 5, 6, 7]
-
 var description = """
 LOADS OF WORLDS!
 """

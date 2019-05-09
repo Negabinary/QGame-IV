@@ -12,7 +12,3 @@ var initial_state_vector = PoolVector2Array([
 	Vector2(0,0), Vector2(0.5,0), Vector2(0.5,0), Vector2(0,0),
 	Vector2(0,0), Vector2(0,0), Vector2(0.5,0), Vector2(0.5,0),
 ])
-
-var initial_mosaic_tree = [[0, 1], [2, 3]]
-
-var intitial_mosaic_map = [1, 2, 6, 9]

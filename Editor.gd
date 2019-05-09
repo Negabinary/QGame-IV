@@ -14,8 +14,6 @@ var level_data
 
 var actors
 var initial_state_vector
-var initial_mosaic_tree
-var intitial_mosaic_map
 var initial_state
 var world_path
 
@@ -34,8 +32,6 @@ func initialise(level_data_path):
 	level_data = load(level_data_path).new()
 	actors = level_data.actors
 	initial_state_vector = level_data.initial_state_vector
-	initial_mosaic_tree = level_data.initial_mosaic_tree
-	intitial_mosaic_map = level_data.intitial_mosaic_map
 	initial_state = TimeState.new(level_data.actors, level_data.initial_state_vector)
 	world_path = level_data.world_path
 	

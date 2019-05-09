@@ -20,9 +20,6 @@ class CodeBlock:
 		self.actor = actor
 		self.qubit_id = actor.qubit
 	
-	func apply_action(state_vector, affected_worlds):
-		pass
-	
 	func filter_affected_worlds(affected_worlds):
 		return affected_worlds
 	
@@ -56,16 +53,16 @@ class CodeBlockSword:
 	func _init(actor_id, actor).(actor_id, actor):
 		pass
 	
-	func apply_action(state_vector, affected_worlds):
-		var filtered_worlds = get_guard_affected_worlds(affected_worlds)
-		state_vector.apply_small_matrix([[Vector2(0,0),Vector2(1,0)], [Vector2(1,0),Vector2(0,0)]], qubit_id, filtered_worlds)
-	
 	func get_paired_world(world_id, affected_worlds):
 		var filtered_worlds = get_guard_affected_worlds(affected_worlds)
 		if world_id in filtered_worlds:
 			return world_id ^ (1 << qubit_id)
 		else:
 			return world_id
+	
+	func get_matrix(world_count:int, affected_worlds:Array) -> SparseMatrix:
+		var filtered_worlds = get_guard_affected_worlds(affected_worlds)
+		return GateBuilder.new_not(world_count, qubit_id, filtered_worlds)
 	
 	func get_guard_affected_worlds(affected_worlds):
 		if actor.has("guard"):
@@ -78,10 +75,6 @@ class CodeBlockSword:
 			return filtered_worlds
 		else:
 			return affected_worlds
-	
-	func get_matrix(world_count:int, affected_worlds:Array) -> SparseMatrix:
-		var filtered_worlds = get_guard_affected_worlds(affected_worlds)
-		return GateBuilder.new_not(world_count, qubit_id, filtered_worlds)
 
 
 class CodeBlockHadamard:
@@ -89,9 +82,6 @@ class CodeBlockHadamard:
 		
 	func _init(actor_id, actor).(actor_id, actor):
 		pass
-	
-	func apply_action(state_vector, affected_worlds):
-		state_vector.apply_small_matrix([[Vector2(0.707106781,0),Vector2(0.707106781,0)], [Vector2(0.707106781,0),Vector2(-0.707106781,0)]], qubit_id, affected_worlds)
 	
 	func get_matrix(world_count:int, affected_worlds:Array) -> SparseMatrix:
 		return GateBuilder.new_hadamard(world_count, qubit_id, affected_worlds)

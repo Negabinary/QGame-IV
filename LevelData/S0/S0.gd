@@ -16,9 +16,6 @@ var initial_state_vector = PoolVector2Array([
 
 var blocks  = [CodeBlocks.SWORD, CodeBlocks.TIMID_SCOUT, CodeBlocks.CONFIDENT_SCOUT]
 
-var initial_mosaic_tree = [[0, 1], [2, 3]]
-
-var intitial_mosaic_map = [0, 5, 6, 7]
 
 var description = """
 Good news! This time there's only a 3/4 chance that there's someone at your throat! Not ideal, but better...

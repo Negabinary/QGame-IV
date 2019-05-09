@@ -65,12 +65,6 @@ func get_affected_worlds_preview(world_count, preview_code_block):
 
 func apply_actions(state_vector : StateVector) -> StateVector:
 	return total_matrix.multiply_vector(state_vector)
-	
-	"""
-	var affected_worlds = get_affected_worlds(state_vector.get_world_count())
-	for code_block in code_block_array:
-		code_block.apply_action(state_vector, affected_worlds)
-	"""
 
 func get_code_array():
 	return code_array

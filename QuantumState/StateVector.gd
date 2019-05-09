@@ -14,15 +14,6 @@ func get_world_count():
 
 func get_vector():
 	return vector
-
-func apply_small_matrix(small_matrix, affected_qubit, affected_worlds):
-	var posbit = 1 << affected_qubit
-	for world_id in affected_worlds:
-		if (world_id | posbit != world_id):
-			var old_off_state = vector[world_id ^ posbit]
-			var old_on_state = vector[world_id]
-			vector[world_id ^ posbit] = multiply_complex(old_off_state, small_matrix[0][0]) + multiply_complex(old_on_state, small_matrix[0][1])
-			vector[world_id] = multiply_complex(old_off_state, small_matrix[1][0]) + multiply_complex(old_on_state, small_matrix[1][1])
 		
 func multiply_complex(vec1, vec2):
 	return Vector2(vec1.x * vec2.x - vec1.y * vec2.y, vec1.x * vec2.y + vec1.y * vec2.x)

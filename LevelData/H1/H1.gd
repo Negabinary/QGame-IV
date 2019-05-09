@@ -16,10 +16,6 @@ var initial_state_vector = PoolVector2Array([
 
 var blocks  = [CodeBlocks.SWORD, CodeBlocks.HADAMARD, CodeBlocks.TIMID_SCOUT, CodeBlocks.CONFIDENT_SCOUT]
 
-var initial_mosaic_tree = [[0,1],[[2,3],[4,5]]]
-
-var intitial_mosaic_map = [2,7,0,1,4,5]
-
 var description = """
 This one is just a quantum mess. Pay attention to the signs on each parallel world's value.
 """

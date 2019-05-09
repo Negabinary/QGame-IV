@@ -14,10 +14,6 @@ var initial_state_vector = PoolVector2Array([
 
 var blocks  = [CodeBlocks.SWORD, CodeBlocks.HADAMARD, CodeBlocks.TIMID_SCOUT, CodeBlocks.CONFIDENT_SCOUT]
 
-var initial_mosaic_tree = [0, 1]
-
-var intitial_mosaic_map = [1, 4]
-
 var description = """
 There may or may not be an ambush on you.
 There may or may not be an ambush on your enemy.

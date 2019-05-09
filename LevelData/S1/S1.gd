@@ -16,10 +16,6 @@ var initial_state_vector = PoolVector2Array([
 
 var blocks  = [CodeBlocks.SWORD, CodeBlocks.TIMID_SCOUT, CodeBlocks.CONFIDENT_SCOUT]
 
-var initial_mosaic_tree = [0, 1]
-
-var intitial_mosaic_map = [1, 4]
-
 var description = """
 After a night out, you regret playing a game of quantum Russian roulette with one of your nobles. 
 

@@ -31,3 +31,18 @@ func get_world_probabilities():
 	for world_state in vector:
 		probabilities += [world_state.length_squared()]
 	return probabilities
+
+func get_state(world_id:int) -> float:
+	return vector[world_id].length()
+
+func get_state_complex(world_id:int) -> Vector2:
+	return vector[world_id]
+
+func get_state_squared(world_id:int) -> float:
+	return vector[world_id].length_squared()
+
+func get_max_state() -> float:
+	var max_state_squared : float = 0
+	for state in vector:
+		max_state_squared = max(state.length_squared(), max_state_squared)
+	return sqrt(max_state_squared)

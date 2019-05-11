@@ -18,7 +18,7 @@ var initial_state_vector = PoolVector2Array([
 	Vector2(0,0), Vector2(0,0), Vector2(0,0), Vector2(0,0),
 	
 	Vector2(0,0), Vector2(0.5,0), Vector2(0,0), Vector2(0,0),
-	Vector2(0,0.5), Vector2(0,0), Vector2(0,0), Vector2(0,0),
+	Vector2(0.5,0), Vector2(0,0), Vector2(0,0), Vector2(0,0),
 	Vector2(0,0), Vector2(0,0), Vector2(0,0), Vector2(0,0),
 	Vector2(0,0), Vector2(0,0), Vector2(0,0), Vector2(0,0),
 ])

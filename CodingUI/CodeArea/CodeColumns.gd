@@ -51,8 +51,17 @@ func get_state(column_id):
 	else:
 		return get_child(column_id).get_state()
 
+
 func get_state_count():
 	return get_child_count()
+
+
+func get_forward_matrix(column_id : int) -> SparseMatrix:
+	return get_child(column_id).get_forward_matrix()
+
+
+func get_backward_matrix(column_id : int) -> SparseMatrix:
+	return get_child(column_id).get_backward_matrix()
 
 
 signal code_block_added

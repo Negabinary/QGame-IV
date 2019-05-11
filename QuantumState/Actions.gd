@@ -71,3 +71,9 @@ func get_code_array():
 
 func get_code_block_array():
 	return code_block_array
+
+func get_forward_matrix() -> SparseMatrix:
+	return total_matrix
+
+func get_backward_matrix() -> SparseMatrix:
+	return total_matrix_inverse

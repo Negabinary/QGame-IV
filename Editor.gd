@@ -7,7 +7,7 @@ const TimeState = preload("res://QuantumState/TimeState.gd")
 var head_column
 var code_columns
 var footer_column
-var world_viewer
+var world_viewer : WorldViewer
 var complete_level_button
 
 var level_data
@@ -73,8 +73,14 @@ func get_state_at_time(time):
 
 
 func update_states_from(column_id):
+	change_time(column_id + 1)
+	var backward_matrix:SparseMatrix = code_columns.get_backward_matrix(column_id)
 	if column_id <= code_columns.get_state_count():
 		code_columns.update_states_from(column_id, get_state_at_time(column_id))
+	update_final_probabilities()
+	var forward_matrix:SparseMatrix = code_columns.get_forward_matrix(column_id)
+	var difference_matrix:SparseMatrix = backward_matrix.multiply(forward_matrix)
+	world_viewer.apply_matrix(get_state_at_time(current_time), difference_matrix)
 	
 
 func update_final_probabilities():
@@ -111,31 +117,22 @@ signal code_column_to_be_removed
 func on_code_block_added(column_id, actor_id, mt_code_block):
 	var code_block = Actions.mt_code_to_code_block(mt_code_block, actor_id, actors[actor_id])
 	update_states_from(column_id)
-	change_time(column_id + 1)
-	update_world_container()
-	update_final_probabilities()
-	update_world_container(null, code_block)
 
 
 func on_code_block_changed(column_id, actor_id, mt_code_block):
 	update_states_from(column_id)
-	change_time(column_id + 1)
-	update_world_container()
-	update_final_probabilities()
 
 func on_code_block_removed(column_id, actor_id):
 	update_states_from(column_id)
-	change_time(column_id + 1)
-	update_world_container()
-	update_final_probabilities()
 
 func on_code_block_preview(column_id, actor_id, mt_code_block):
 	var code_block = Actions.mt_code_to_code_block(mt_code_block, actor_id, actors[actor_id])
 	change_time(column_id + 1)
-	update_world_container(code_block)
+	#update_world_container(code_block)
 
 func on_code_block_preview_end(column_id, actor_id):
-	update_world_container()
+	#update_world_container()
+	pass
 
 func on_code_column_selected(column_id):
 	change_time(column_id + 1)
@@ -144,8 +141,6 @@ func on_code_column_removed(column_id):
 	update_states_from(column_id)
 	if (column_id + 1) <= current_time:
 		change_time(current_time-1)
-	update_world_container()
-	update_final_probabilities()
 
 func on_return_to_level_select():
 	emit_signal("return_to_level_select")

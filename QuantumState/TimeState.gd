@@ -29,13 +29,16 @@ func get_affected_worlds():
 func get_affected_worlds_preview(preview_code_block):
 	return actions.get_affected_worlds_preview(state_vector.get_world_count(), preview_code_block)
 
-func get_vector():
+func get_vector() -> Array:
 	return state_vector.get_vector()
 
-func get_world_state(world_id):
+func get_state_vector() -> StateVector:
+	return state_vector
+
+func get_world_state(world_id) -> Vector2:
 	return get_vector()[world_id]
 
-func get_world_count():
+func get_world_count() -> int:
 	return get_vector().size()
 
 func get_code_array():
@@ -59,3 +62,9 @@ func get_world_probabilities():
 func get_actor_probability(actor_id):
 	var qubit_id = actors[actor_id].qubit
 	return state_vector.get_qubit_probability(qubit_id)
+
+func get_forward_matrix() -> SparseMatrix:
+	return actions.get_forward_matrix()
+
+func get_backward_matrix() -> SparseMatrix:
+	return actions.get_backward_matrix()

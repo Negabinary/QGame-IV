@@ -33,13 +33,25 @@ _global_script_classes=[ {
 "class": "TimeState",
 "language": "GDScript",
 "path": "res://QuantumState/TimeState.gd"
+}, {
+"base": "ViewportContainer",
+"class": "WorldFrame",
+"language": "GDScript",
+"path": "res://Worlds/WorldFrame.gd"
+}, {
+"base": "ColorRect",
+"class": "WorldViewer",
+"language": "GDScript",
+"path": "res://Worlds/WorldViewer.gd"
 } ]
 _global_script_class_icons={
 "Actions": "",
 "GateBuilder": "",
 "SparseMatrix": "",
 "StateVector": "",
-"TimeState": ""
+"TimeState": "",
+"WorldFrame": "",
+"WorldViewer": ""
 }
 
 [application]

@@ -43,6 +43,9 @@ func multiply_vector(other:StateVector) -> StateVector:
 			result[y] += Vector2(world_vector[z].x * columns[z][y], 0)
 	return StateVector.new(result)
 
+func get_column(column_id:int) -> Dictionary:
+	return columns[column_id]
+
 func print_matrix():
 	print(" ")
 	for i in range(columns.size()):

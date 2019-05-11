@@ -2,7 +2,7 @@ extends PanelContainer
 
 const DROP_AREA_SCENE = preload("res://CodingUI/CodeArea/DropArea.tscn")
 
-var state
+var state : TimeState
 var end_column = true
 
 
@@ -59,6 +59,14 @@ func update_state(previous_state):
 
 func set_select_button(new_state):
 	$VBoxContainer/HBoxContainer/SelectButton.pressed = new_state
+
+
+func get_forward_matrix() -> SparseMatrix :
+	return state.get_forward_matrix()
+
+
+func get_backward_matrix() -> SparseMatrix:
+	return state.get_backward_matrix()
 
 
 signal block_added

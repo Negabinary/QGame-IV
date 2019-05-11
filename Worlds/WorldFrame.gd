@@ -1,20 +1,23 @@
 extends ViewportContainer
 
+class_name WorldFrame
+
 const ANIMATION_TIME = 1
 onready var material_positive = load("res://Worlds/Shaders/PositiveShader.tres")
 onready var material_negative = load("res://Worlds/Shaders/NegativeShader.tres")
+
+var frame_value : float setget set_frame_value
 
 func initialise(loaded_world):
 	var world = loaded_world.instance()
 	material = material.duplicate()
 	$b.add_child(world)
 
-func update_state(time_state, world_id, max_state, preview, change):
+func update_state(time_state, world_id, max_state, preview, world_value:Vector2):
 	var qubit_count = time_state.get_qubit_count()
 	var world_state_array = _get_world_state_array(world_id, qubit_count)
 	var code_array = time_state.get_qubit_code_array()
 	var world_active = world_id in time_state.get_affected_worlds()
-	var world_value = time_state.get_world_state(world_id)
 	
 	var world_preview_active
 	if preview != null:
@@ -26,12 +29,18 @@ func update_state(time_state, world_id, max_state, preview, change):
 	$SelectionLeft.color = Color(int(world_active),int(world_active),int(world_active),1)
 	$SelectionRight.color = Color(int(world_active),int(world_active),int(world_active),1)
 	#$ColorRect.color = Color(0,0,0,1-(world_value.length_squared()/max_state))
-	modulate = Color(1,1,1,(world_value.length())*0.5 + 0) # /max_state
+	set_frame_value(world_value.x)
 	$Probability.text = str(round(world_value.x*100)/100) + "\n" + str(round(world_value.length_squared()*100)) + "%" + "\n" + str(rect_size.x) + ", " + str(rect_size.y)
-	if world_value.x >= 0:
+	
+
+
+func set_frame_value(new_frame_value):
+	modulate = Color(1,1,1,(abs(new_frame_value))*0.5 + 0)
+	if new_frame_value >= 0:
 		set_material(material_positive)
 	else:
 		set_material(material_negative)
+	frame_value = new_frame_value
 
 
 func adjust_anchor(bounds):
@@ -46,7 +55,7 @@ func adjust_anchor(bounds):
 	margin_bottom = -1
 
 
-func animate_anchor(bounds):
+func animate_anchor(bounds, new_frame_value):
 	var tween = $Tween
 	
 	"""
@@ -70,6 +79,10 @@ func animate_anchor(bounds):
 	tween.interpolate_property(self, "margin_right", margin_right, -1, ANIMATION_TIME, tween.TRANS_QUINT , tween.EASE_IN_OUT)
 	tween.interpolate_property(self, "margin_top", margin_top, 1, ANIMATION_TIME, tween.TRANS_QUINT , tween.EASE_IN_OUT)
 	tween.interpolate_property(self, "margin_bottom", margin_bottom, -1, ANIMATION_TIME, tween.TRANS_QUINT , tween.EASE_IN_OUT)
+	
+	tween.interpolate_property(self, "margin_bottom", margin_bottom, -1, ANIMATION_TIME, tween.TRANS_QUINT , tween.EASE_IN_OUT)
+	
+	tween.interpolate_property(self, "frame_value", frame_value, new_frame_value, ANIMATION_TIME, tween.TRANS_QUINT, tween.EASE_IN_OUT)
 	
 	tween.start()
 

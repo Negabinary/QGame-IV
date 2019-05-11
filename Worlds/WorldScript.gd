@@ -26,7 +26,16 @@ func update_state(new_state, code_array, active, preview, preview_active):
 				characters[i].get_node("Off").visible = true
 				characters[i].get_node("OffSword").visible = false
 		
-		
+		if preview == null:
+			characters[i].modulate = Color(1,1,1,1)
+		else:
+			if preview.get_qubit_id() == i and active and preview_active:
+				characters[i].modulate = Color(1,0,0,1)
+			else:
+				characters[i].modulate = Color(1,1,1,1)
+
+func update_state_preview(active, preview, preview_active):
+	for i in range(characters.size()):
 		if preview == null:
 			characters[i].modulate = Color(1,1,1,1)
 		else:

@@ -7,13 +7,17 @@ onready var material_positive = load("res://Worlds/Shaders/PositiveShader.tres")
 onready var material_negative = load("res://Worlds/Shaders/NegativeShader.tres")
 
 var frame_value : float setget set_frame_value
+var time_state : TimeState
+var world_id : int
 
 func initialise(loaded_world):
 	var world = loaded_world.instance()
 	material = material.duplicate()
 	$b.add_child(world)
 
-func update_state(time_state, world_id, max_state, preview, world_value:Vector2):
+func update_state(new_time_state, new_world_id, max_state, preview, world_value:Vector2):
+	time_state = new_time_state
+	world_id = new_world_id
 	var qubit_count = time_state.get_qubit_count()
 	var world_state_array = _get_world_state_array(world_id, qubit_count)
 	var code_array = time_state.get_qubit_code_array()
@@ -31,7 +35,15 @@ func update_state(time_state, world_id, max_state, preview, world_value:Vector2)
 	#$ColorRect.color = Color(0,0,0,1-(world_value.length_squared()/max_state))
 	set_frame_value(world_value.x)
 	$Probability.text = str(round(world_value.x*100)/100) + "\n" + str(round(world_value.length_squared()*100)) + "%" + "\n" + str(rect_size.x) + ", " + str(rect_size.y)
-	
+
+func set_state_preview(preview):
+	var world_active = world_id in time_state.get_affected_worlds()
+	var world_preview_active
+	if preview != null:
+		world_preview_active = world_id in time_state.get_affected_worlds_preview(preview)
+	else:
+		world_preview_active = false
+	$b.get_child(0).update_state_preview(world_active, preview, world_preview_active)
 
 
 func set_frame_value(new_frame_value):

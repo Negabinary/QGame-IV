@@ -352,6 +352,5 @@ margin_top = 118.0
 margin_right = 1024.0
 margin_bottom = 128.0
 custom_styles/panel = SubResource( 7 )
-
 [connection signal="button_up" from="Main/HBoxContainer/PanelContainer/VBoxContainer/ReturnButton" to="Main" method="on_return_to_level_select"]
 [connection signal="button_up" from="Main/CodeArea/VBoxContainer/CodeBlockShelf/HBoxContainer2/CompleteLevelButton" to="Main" method="on_level_complete"]

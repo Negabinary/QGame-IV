@@ -54,15 +54,41 @@ func initialise(level_data_path):
 
 
 func change_time(new_time):
+	if current_time != new_time:
+		ui_set_time(new_time)
+		update_world_container()
+
+
+func animate_time(new_time):
+	var difference_matrix:SparseMatrix = GateBuilder.new_identity(initial_state.get_world_count())
+	print("===")
+	if new_time > current_time:
+		for time in range(new_time, current_time, -1):
+			print(time)
+			difference_matrix = difference_matrix.multiply(get_state_at_time(time).get_forward_matrix())
+		ui_set_time(new_time)
+		world_viewer.apply_matrix(get_state_at_time(current_time), difference_matrix)
+		print("---")
+		difference_matrix.print_matrix()
+	elif new_time < current_time:
+		for time in range(new_time + 1, current_time + 1):
+			print(time)
+			difference_matrix = difference_matrix.multiply(get_state_at_time(time).get_backward_matrix())
+		ui_set_time(new_time)
+		world_viewer.apply_matrix(get_state_at_time(current_time), difference_matrix)
+		print("---")
+		difference_matrix.print_matrix()
+
+
+func ui_set_time(new_time):
 	head_column.set_column_selected(new_time == 0)
 	code_columns.select_column(new_time - 1)
 	current_time = new_time
-	update_world_container()
 
 
-func update_world_container(preview=null, change=null):
+func update_world_container():
 	var new_state = get_state_at_time(current_time)
-	world_viewer.set_state(new_state, preview, change)
+	world_viewer.set_state(new_state)
 
 
 func get_state_at_time(time):
@@ -73,7 +99,7 @@ func get_state_at_time(time):
 
 
 func update_states_from(column_id):
-	change_time(column_id + 1)
+	ui_set_time(column_id + 1)
 	var backward_matrix:SparseMatrix = code_columns.get_backward_matrix(column_id)
 	if column_id <= code_columns.get_state_count():
 		code_columns.update_states_from(column_id, get_state_at_time(column_id))
@@ -81,7 +107,7 @@ func update_states_from(column_id):
 	var forward_matrix:SparseMatrix = code_columns.get_forward_matrix(column_id)
 	var difference_matrix:SparseMatrix = backward_matrix.multiply(forward_matrix)
 	world_viewer.apply_matrix(get_state_at_time(current_time), difference_matrix)
-	
+
 
 func update_final_probabilities():
 	var probabilities = []
@@ -118,7 +144,6 @@ func on_code_block_added(column_id, actor_id, mt_code_block):
 	var code_block = Actions.mt_code_to_code_block(mt_code_block, actor_id, actors[actor_id])
 	update_states_from(column_id)
 
-
 func on_code_block_changed(column_id, actor_id, mt_code_block):
 	update_states_from(column_id)
 
@@ -127,20 +152,23 @@ func on_code_block_removed(column_id, actor_id):
 
 func on_code_block_preview(column_id, actor_id, mt_code_block):
 	var code_block = Actions.mt_code_to_code_block(mt_code_block, actor_id, actors[actor_id])
-	change_time(column_id + 1)
-	#update_world_container(code_block)
+	if column_id + 1 < code_columns.get_state_count():
+		change_time(column_id + 1)
+	else:
+		change_time(column_id)
+	world_viewer.update_previews(code_block)
+
 
 func on_code_block_preview_end(column_id, actor_id):
-	#update_world_container()
-	pass
+	world_viewer.update_previews()
+
 
 func on_code_column_selected(column_id):
-	change_time(column_id + 1)
+	animate_time(column_id + 1)
 
 func on_code_column_removed(column_id):
-	update_states_from(column_id)
 	if (column_id + 1) <= current_time:
-		change_time(current_time-1)
+		ui_set_time(current_time-1)
 
 func on_return_to_level_select():
 	emit_signal("return_to_level_select")

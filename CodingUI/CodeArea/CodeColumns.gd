@@ -76,7 +76,6 @@ signal code_column_removed
 func on_block_added(column_id, actor_id, code_block):
 	if column_id == get_child_count() - 1:
 		insert_column(column_id + 1)
-		emit_signal("code_column_selected", column_id)
 	emit_signal("code_block_added", column_id, actor_id, code_block)
 
 func on_block_changed(column_id, actor_id, code_block):

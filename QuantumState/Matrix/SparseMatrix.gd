@@ -47,7 +47,6 @@ func get_column(column_id:int) -> Dictionary:
 	return columns[column_id]
 
 func print_matrix():
-	print(" ")
 	for i in range(columns.size()):
 		var string = ""
 		for j in range(columns.size()):

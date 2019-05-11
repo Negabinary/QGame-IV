@@ -25,10 +25,10 @@ func initialise_world_viewer(time_state:TimeState, world_path):
 
 
 
-func set_state(time_state:TimeState, preview=null, change=null):
+func set_state(time_state:TimeState):
 	current_vector = time_state.get_state_vector()
 	var world_count = time_state.get_world_count()
-	_update_states(time_state, preview, change)
+	_update_states(time_state)
 
 
 func _instance_worlds(world_count):
@@ -55,15 +55,16 @@ func _generate_grid(world_count):
 				])
 
 
-func _update_states(time_state:TimeState, preview=null, change=null) -> void:
+func _update_states(time_state:TimeState) -> void:
+	current_vector = time_state.get_state_vector()
 	var state_vector:StateVector = time_state.get_state_vector()
 	var max_state:float = state_vector.get_max_state()
 	for world_id in world_count:
-		if state_vector.get_state_squared(world_id) == 0:
+		if state_vector.get_state_squared(world_id) < 0.0000000001:
 			make_or_remove_frames_for_world(world_id, 0)
 		else:
 			make_or_remove_frames_for_world(world_id, 1)
-			world_frames[world_id][0].update_state(time_state, world_id, 1, preview, time_state.get_world_state(world_id))
+			world_frames[world_id][0].update_state(time_state, world_id, 1, null, time_state.get_world_state(world_id))
 
 
 func apply_matrix(new_time_state:TimeState, change_matrix:SparseMatrix) -> void:
@@ -72,7 +73,7 @@ func apply_matrix(new_time_state:TimeState, change_matrix:SparseMatrix) -> void:
 	var new_world_frames := []
 	for world_id_from in new_time_state.get_world_count():
 		var new_world_frames_row = []
-		if current_vector.get_state_squared(world_id_from) == 7:
+		if current_vector.get_state_squared(world_id_from)  < 0.0000000001:
 			make_or_remove_frames_for_world(world_id_from, 0)
 		else:
 			var change_matrix_column := change_matrix.get_column(world_id_from)
@@ -89,38 +90,12 @@ func apply_matrix(new_time_state:TimeState, change_matrix:SparseMatrix) -> void:
 	world_frames = new_world_frames
 	current_vector = new_vector
 
-	"""
-	var world_count:int = time_state.get_world_count()
-	var state_vector:StateVector = time_state.get_state_vector()
-	var max_state:float = state_vector.get_max_state()
-	var affected_worlds  = time_state.get_affected_worlds()
-	for world_id in range(world_count):
-		var world_frame = get_child(world_id)
-		world_frame.update_state(time_state, world_id, max_state, preview, change)
-		
-		var world_value = time_state.get_world_state(world_id)
-		
-		if change != null:
-			if change is CodeBlocks.CodeBlockSword and world_id in affected_worlds:
-				var new_row = world_id / columns
-				var new_column = world_id % columns
-				var prev_world_id = change.get_paired_world(world_id, affected_worlds)
-				var prev_row = prev_world_id / columns
-				var prev_column = prev_world_id % columns
-				
-				world_frame.adjust_anchor([
-						float(prev_row)/rows, 
-						float(prev_row+1)/rows, 
-						float(prev_column)/columns, 
-						float(prev_column+1)/columns
-					])
-				world_frame.animate_anchor([
-						float(new_row)/rows, 
-						float(new_row+1)/rows, 
-						float(new_column)/columns, 
-						float(new_column+1)/columns
-					])
-	"""
+
+func update_previews(preview=null):
+	for world_id in world_frames.size():
+		for world_frame in world_frames[world_id]:
+			world_frame.set_state_preview(preview)
+
 	
 func add_frame(row_id:int) -> void:
 	var world_frame = VIEWPORT_SCENE.instance()

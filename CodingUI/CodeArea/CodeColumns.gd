@@ -14,7 +14,7 @@ func initialise_code_columns(level_data, initial_state):
 
 func insert_column(time):
 	var code_column = CODE_COLUMN.instance()
-	code_column.initialise(actors)
+	code_column.initialise(actors, time + 1)
 	code_column.update_state(get_state(time-1))
 	code_column.connect("block_added", self, "on_block_added")
 	code_column.connect("block_changed", self, "on_block_changed")
@@ -29,6 +29,8 @@ func insert_column(time):
 
 func remove_column(column_id):
 	remove_child(get_child(column_id))
+	for i in range(max(0, column_id), get_child_count()):
+		get_child(i).set_column_no(i+1)
 
 
 func select_column(column_id):
@@ -76,16 +78,17 @@ signal code_column_removed
 func on_block_added(column_id, actor_id, code_block):
 	if column_id == get_child_count() - 1:
 		insert_column(column_id + 1)
-	emit_signal("code_block_added", column_id, actor_id, code_block)
+	emit_signal("code_block_added", column_id)
 
 func on_block_changed(column_id, actor_id, code_block):
-	emit_signal("code_block_changed", column_id, actor_id, code_block)
+	emit_signal("code_block_changed", column_id)
 
 func on_block_removed(column_id, actor_id):
-	emit_signal("code_block_removed", column_id, actor_id)
+	emit_signal("code_block_removed")
 
-func on_block_preview(column_id, actor_id, code_block):
-	emit_signal("code_block_preview", column_id, actor_id, code_block)
+func on_block_preview(column_id, actor_id, mt_code_block):
+	var code_block:CodeBlock = Actions.mt_code_to_code_block(mt_code_block, actor_id, actors[actor_id])
+	emit_signal("code_block_preview", column_id, code_block)
 
 func on_block_preview_end(column_id, actor_id):
 	emit_signal("code_block_preview_end", column_id, actor_id)

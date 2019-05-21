@@ -3,6 +3,7 @@ extends PanelContainer
 const DROP_AREA_SCENE = preload("res://CodingUI/CodeArea/DropArea.tscn")
 
 var state : TimeState
+var column_no : int
 var end_column = true
 
 
@@ -25,7 +26,8 @@ func _is_mouse_over():
 	return get_global_rect().has_point(get_global_mouse_position())
 
 
-func initialise(actors):
+func initialise(actors, column_no:int):
+	set_column_no(column_no)
 	for actor_id in range(actors.size()):
 		var actor = actors[actor_id]
 		var drop_area = DROP_AREA_SCENE.instance()
@@ -67,6 +69,11 @@ func get_forward_matrix() -> SparseMatrix :
 
 func get_backward_matrix() -> SparseMatrix:
 	return state.get_backward_matrix()
+
+
+func set_column_no(column_no:int) -> void:
+	self.column_no = column_no
+	$VBoxContainer/HBoxContainer/SelectButton.text = str(column_no)
 
 
 signal block_added

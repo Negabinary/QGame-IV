@@ -83,18 +83,20 @@ custom_constants/separation = 0
 script = ExtResource( 2 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Main"]
+editor/display_folded = true
 margin_right = 1024.0
 margin_bottom = 572.0
 size_flags_vertical = 3
 
 [node name="PanelContainer" type="PanelContainer" parent="Main/HBoxContainer"]
+editor/display_folded = true
+visible = false
 margin_right = 240.0
 margin_bottom = 572.0
 rect_min_size = Vector2( 240, 0 )
 custom_styles/panel = SubResource( 3 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Main/HBoxContainer/PanelContainer"]
-editor/display_folded = true
 margin_left = 5.0
 margin_top = 5.0
 margin_right = 235.0
@@ -103,21 +105,14 @@ alignment = 2
 
 [node name="Label" type="Label" parent="Main/HBoxContainer/PanelContainer/VBoxContainer"]
 margin_right = 230.0
-margin_bottom = 534.0
+margin_bottom = 562.0
 size_flags_vertical = 3
 text = "I have a 10 year old son. He has words. He is so good with these words it's unbelievable. We are going to make placeholder text great again. Greater than ever before.
 
 He’s not a word hero. He’s a word hero because he was captured. I like text that wasn’t captured. Lorem Ipsum is unattractive, both inside and out. I fully understand why it’s former users left it for something else. They made a good decision. I think the only difference between me and the other placeholder text is that I’m more honest and my words are more beautiful. If Trump Ipsum weren’t my own words, perhaps I’d be dating it."
 autowrap = true
 
-[node name="ReturnButton" type="Button" parent="Main/HBoxContainer/PanelContainer/VBoxContainer"]
-margin_top = 538.0
-margin_right = 230.0
-margin_bottom = 562.0
-text = "Return to Level Select Screen"
-
 [node name="WorldViewerContainer" type="Control" parent="Main/HBoxContainer"]
-margin_left = 244.0
 margin_right = 1024.0
 margin_bottom = 572.0
 size_flags_horizontal = 3
@@ -151,18 +146,26 @@ margin_bottom = 128.0
 custom_constants/separation = 5
 
 [node name="CodeBlockShelf" type="PanelContainer" parent="Main/CodeArea/VBoxContainer"]
+editor/display_folded = true
 margin_right = 1024.0
 margin_bottom = 60.0
 rect_min_size = Vector2( 0, 60 )
 custom_styles/panel = SubResource( 7 )
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Main/CodeArea/VBoxContainer/CodeBlockShelf"]
+editor/display_folded = true
 margin_left = 5.0
 margin_top = 5.0
 margin_right = 1019.0
 margin_bottom = 55.0
 
+[node name="ReturnButton" type="Button" parent="Main/CodeArea/VBoxContainer/CodeBlockShelf/HBoxContainer2"]
+margin_right = 138.0
+margin_bottom = 50.0
+text = "Back to Level Select"
+
 [node name="HBoxContainer" type="HBoxContainer" parent="Main/CodeArea/VBoxContainer/CodeBlockShelf/HBoxContainer2"]
+margin_left = 142.0
 margin_right = 845.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
@@ -170,13 +173,13 @@ custom_constants/separation = 10
 alignment = 1
 
 [node name="VSeparator2" type="VSeparator" parent="Main/CodeArea/VBoxContainer/CodeBlockShelf/HBoxContainer2/HBoxContainer"]
-margin_left = 256.0
-margin_right = 260.0
+margin_left = 185.0
+margin_right = 189.0
 margin_bottom = 50.0
 
 [node name="Button" type="TextureButton" parent="Main/CodeArea/VBoxContainer/CodeBlockShelf/HBoxContainer2/HBoxContainer"]
-margin_left = 270.0
-margin_right = 320.0
+margin_left = 199.0
+margin_right = 249.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 50, 50 )
 size_flags_horizontal = 0
@@ -186,8 +189,8 @@ texture_normal = ExtResource( 4 )
 script = ExtResource( 5 )
 
 [node name="Button3" type="TextureButton" parent="Main/CodeArea/VBoxContainer/CodeBlockShelf/HBoxContainer2/HBoxContainer"]
-margin_left = 330.0
-margin_right = 380.0
+margin_left = 259.0
+margin_right = 309.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 50, 50 )
 size_flags_horizontal = 0
@@ -197,13 +200,13 @@ script = ExtResource( 5 )
 dragging_id = 1
 
 [node name="VSeparator" type="VSeparator" parent="Main/CodeArea/VBoxContainer/CodeBlockShelf/HBoxContainer2/HBoxContainer"]
-margin_left = 390.0
-margin_right = 394.0
+margin_left = 319.0
+margin_right = 323.0
 margin_bottom = 50.0
 
 [node name="Button4" type="TextureButton" parent="Main/CodeArea/VBoxContainer/CodeBlockShelf/HBoxContainer2/HBoxContainer"]
-margin_left = 404.0
-margin_right = 454.0
+margin_left = 333.0
+margin_right = 383.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 50, 50 )
 size_flags_horizontal = 0
@@ -213,8 +216,8 @@ script = ExtResource( 5 )
 dragging_id = 2
 
 [node name="Button2" type="TextureButton" parent="Main/CodeArea/VBoxContainer/CodeBlockShelf/HBoxContainer2/HBoxContainer"]
-margin_left = 464.0
-margin_right = 514.0
+margin_left = 393.0
+margin_right = 443.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 50, 50 )
 size_flags_horizontal = 0
@@ -224,8 +227,8 @@ script = ExtResource( 5 )
 dragging_id = 3
 
 [node name="Button5" type="TextureButton" parent="Main/CodeArea/VBoxContainer/CodeBlockShelf/HBoxContainer2/HBoxContainer"]
-margin_left = 524.0
-margin_right = 574.0
+margin_left = 453.0
+margin_right = 503.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 50, 50 )
 size_flags_horizontal = 0
@@ -235,8 +238,8 @@ script = ExtResource( 5 )
 dragging_id = 4
 
 [node name="VSeparator3" type="VSeparator" parent="Main/CodeArea/VBoxContainer/CodeBlockShelf/HBoxContainer2/HBoxContainer"]
-margin_left = 584.0
-margin_right = 588.0
+margin_left = 513.0
+margin_right = 517.0
 margin_bottom = 50.0
 
 [node name="CompleteLevelButton" type="Button" parent="Main/CodeArea/VBoxContainer/CodeBlockShelf/HBoxContainer2"]
@@ -249,6 +252,7 @@ text = "Complete Level"
 flat = true
 
 [node name="PanelContainer" type="PanelContainer" parent="Main/CodeArea/VBoxContainer"]
+editor/display_folded = true
 margin_top = 65.0
 margin_right = 1024.0
 margin_bottom = 113.0
@@ -352,5 +356,5 @@ margin_top = 118.0
 margin_right = 1024.0
 margin_bottom = 128.0
 custom_styles/panel = SubResource( 7 )
-[connection signal="button_up" from="Main/HBoxContainer/PanelContainer/VBoxContainer/ReturnButton" to="Main" method="on_return_to_level_select"]
+[connection signal="button_up" from="Main/CodeArea/VBoxContainer/CodeBlockShelf/HBoxContainer2/ReturnButton" to="Main" method="on_return_to_level_select"]
 [connection signal="button_up" from="Main/CodeArea/VBoxContainer/CodeBlockShelf/HBoxContainer2/CompleteLevelButton" to="Main" method="on_level_complete"]

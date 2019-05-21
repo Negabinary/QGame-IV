@@ -1,4 +1,4 @@
-const WORLD_CHARACTERS = preload("res://Enums/WorldCharacters.gd")
+extends LevelData
 
 var world_path = "res://LevelData/B1/B1World.tscn"
 

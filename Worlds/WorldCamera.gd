@@ -4,6 +4,9 @@ extends Camera2D
 var viewport_size
 export (Vector2) var scene_size = Vector2(0, 0)
 
+func initialise():
+	_process(10)
+
 
 func _process(delta):
 	if viewport_size != get_viewport_rect().size:

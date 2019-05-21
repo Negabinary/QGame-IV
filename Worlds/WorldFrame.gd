@@ -14,6 +14,7 @@ func initialise(loaded_world):
 	var world = loaded_world.instance()
 	material = material.duplicate()
 	$b.add_child(world)
+	world.initialise()
 
 func update_state(new_time_state, new_world_id, max_state, preview, world_value:Vector2):
 	time_state = new_time_state

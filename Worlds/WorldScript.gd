@@ -5,6 +5,10 @@ const CODE_BLOCKS = preload("res://Enums/CodeBlocks.gd").CodeBlocks
 onready var characters = $Characters.get_children()
 
 
+func initialise():
+	$Camera2D.initialise()
+
+
 func update_state(new_state, code_array, active, preview, preview_active):
 	for i in range(new_state.size()):
 		if new_state[i] == 1:

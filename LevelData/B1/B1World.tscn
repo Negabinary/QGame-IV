@@ -4,157 +4,95 @@
 [ext_resource path="res://Worlds/WorldCamera.gd" type="Script" id=2]
 
 [sub_resource type="StreamTexture" id=1]
-
 flags = 4
 load_path = "res://.import/back.png-3d29a357216edcfe2e88d47d59df1b43.stex"
 
 [sub_resource type="StreamTexture" id=2]
-
 flags = 4
 load_path = "res://.import/on.png-e0354890b4a1c60c5f0ab22da908660e.stex"
 
 [sub_resource type="StreamTexture" id=3]
-
 flags = 4
 load_path = "res://.import/on_sword.png-4d4f4d2499e5bab0a872452e3124ffdf.stex"
 
 [sub_resource type="StreamTexture" id=4]
-
 flags = 4
 load_path = "res://.import/off.png-f5ad69b9af2e8eaf15c2199be17e6003.stex"
 
 [sub_resource type="StreamTexture" id=5]
-
 flags = 4
 load_path = "res://.import/off_sword.png-9b56eba626bb53a415a0328f962d52e3.stex"
 
-[node name="World" type="Node2D" index="0"]
-
+[node name="World" type="Node2D"]
 script = ExtResource( 1 )
 
-[node name="Camera2D" type="Camera2D" parent="." index="0"]
-
+[node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
 rotating = true
 current = true
-zoom = Vector2( 1, 1 )
-limit_left = -10000000
-limit_top = -10000000
-limit_right = 10000000
-limit_bottom = 10000000
-limit_smoothed = false
-drag_margin_h_enabled = true
-drag_margin_v_enabled = true
-smoothing_enabled = false
-smoothing_speed = 5.0
-offset_v = 0.0
-offset_h = 0.0
-drag_margin_left = 0.2
-drag_margin_top = 0.2
-drag_margin_right = 0.2
-drag_margin_bottom = 0.2
-editor_draw_screen = true
 editor_draw_limits = true
-editor_draw_drag_margin = false
 script = ExtResource( 2 )
-_sections_unfolded = [ "Transform" ]
 scene_size = Vector2( 1680, 780 )
 
-[node name="Sprite" type="Sprite" parent="." index="1"]
-
+[node name="Sprite" type="Sprite" parent="."]
 texture = SubResource( 1 )
-_sections_unfolded = [ "Transform", "Visibility" ]
 
-[node name="Characters" type="Node2D" parent="." index="2"]
+[node name="Characters" type="Node2D" parent="."]
 
-_sections_unfolded = [ "Transform" ]
-
-[node name="King3" type="Node2D" parent="Characters" index="0"]
-
+[node name="King3" type="Node2D" parent="Characters"]
 editor/display_folded = true
 position = Vector2( -458.053, 6.39769 )
-_sections_unfolded = [ "Transform" ]
 
-[node name="On" type="Sprite" parent="Characters/King3" index="0"]
-
+[node name="On" type="Sprite" parent="Characters/King3"]
 texture = SubResource( 2 )
-_sections_unfolded = [ "Transform" ]
 
-[node name="OnSword" type="Sprite" parent="Characters/King3" index="1"]
-
+[node name="OnSword" type="Sprite" parent="Characters/King3"]
 visible = false
 texture = SubResource( 3 )
-_sections_unfolded = [ "Transform" ]
 
-[node name="Off" type="Sprite" parent="Characters/King3" index="2"]
-
+[node name="Off" type="Sprite" parent="Characters/King3"]
 visible = false
 texture = SubResource( 4 )
-_sections_unfolded = [ "Transform" ]
 
-[node name="OffSword" type="Sprite" parent="Characters/King3" index="3"]
-
+[node name="OffSword" type="Sprite" parent="Characters/King3"]
 visible = false
 texture = SubResource( 5 )
-_sections_unfolded = [ "Transform" ]
 
-[node name="King4" type="Node2D" parent="Characters" index="1"]
-
+[node name="King4" type="Node2D" parent="Characters"]
 position = Vector2( 19.1942, 140.654 )
 scale = Vector2( 0.572201, 0.572201 )
-_sections_unfolded = [ "Transform" ]
 
-[node name="On" type="Sprite" parent="Characters/King4" index="0"]
-
+[node name="On" type="Sprite" parent="Characters/King4"]
 texture = SubResource( 2 )
-_sections_unfolded = [ "Transform" ]
 
-[node name="OnSword" type="Sprite" parent="Characters/King4" index="1"]
-
+[node name="OnSword" type="Sprite" parent="Characters/King4"]
 visible = false
 texture = SubResource( 3 )
-_sections_unfolded = [ "Transform" ]
 
-[node name="Off" type="Sprite" parent="Characters/King4" index="2"]
-
+[node name="Off" type="Sprite" parent="Characters/King4"]
 visible = false
 texture = SubResource( 4 )
-_sections_unfolded = [ "Transform" ]
 
-[node name="OffSword" type="Sprite" parent="Characters/King4" index="3"]
-
+[node name="OffSword" type="Sprite" parent="Characters/King4"]
 visible = false
 texture = SubResource( 5 )
-_sections_unfolded = [ "Transform" ]
 
-[node name="King5" type="Node2D" parent="Characters" index="2"]
-
+[node name="King5" type="Node2D" parent="Characters"]
 position = Vector2( 586.746, 26.1541 )
 scale = Vector2( 0.586474, 0.586474 )
-_sections_unfolded = [ "Transform", "Visibility" ]
 
-[node name="On" type="Sprite" parent="Characters/King5" index="0"]
-
+[node name="On" type="Sprite" parent="Characters/King5"]
 position = Vector2( -85.2309, 154.965 )
 texture = SubResource( 2 )
-_sections_unfolded = [ "Transform", "Visibility" ]
 
-[node name="OnSword" type="Sprite" parent="Characters/King5" index="1"]
-
+[node name="OnSword" type="Sprite" parent="Characters/King5"]
 visible = false
 texture = SubResource( 3 )
-_sections_unfolded = [ "Transform" ]
 
-[node name="Off" type="Sprite" parent="Characters/King5" index="2"]
-
+[node name="Off" type="Sprite" parent="Characters/King5"]
 visible = false
 texture = SubResource( 4 )
-_sections_unfolded = [ "Transform" ]
 
-[node name="OffSword" type="Sprite" parent="Characters/King5" index="3"]
-
+[node name="OffSword" type="Sprite" parent="Characters/King5"]
 visible = false
 texture = SubResource( 5 )
-_sections_unfolded = [ "Transform" ]
-
-

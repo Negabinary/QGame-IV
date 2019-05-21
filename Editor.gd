@@ -4,41 +4,25 @@ const WORLD_CHARACTERS = preload("res://Enums/WorldCharacters.gd")
 const Actions = preload("res://QuantumState/Actions.gd")
 const TimeState = preload("res://QuantumState/TimeState.gd")
 
-var head_column
-var code_columns
-var footer_column
-var world_viewer : WorldViewer
-var complete_level_button
+onready var head_column := $CodeArea/VBoxContainer/PanelContainer/HBoxContainer/HeaderColumn
+onready var code_columns :=$CodeArea/VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/CodeColumns
+onready var footer_column := $CodeArea/VBoxContainer/PanelContainer/HBoxContainer/FooterColumn
+onready var world_viewer := $HBoxContainer/WorldViewerContainer/WorldViewer
+onready var complete_level_button := $CodeArea/VBoxContainer/CodeBlockShelf/HBoxContainer2/CompleteLevelButton
 
-var level_data
-
-var actors
-var initial_state_vector
-var initial_state
+var level_data # Untyped because level_data is currently messy; must fix.
+var initial_state : TimeState
 var world_path
 
 var current_time = 0
 
-
-func _ready():
-	head_column = $CodeArea/VBoxContainer/PanelContainer/HBoxContainer/HeaderColumn
-	code_columns = $CodeArea/VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/CodeColumns
-	footer_column = $CodeArea/VBoxContainer/PanelContainer/HBoxContainer/FooterColumn
-	world_viewer = $HBoxContainer/WorldViewerContainer/WorldViewer
-	complete_level_button = $CodeArea/VBoxContainer/CodeBlockShelf/HBoxContainer2/CompleteLevelButton
-	
-
-func initialise(level_data_path):
+func initialise(level_data_path:String) -> void:
 	level_data = load(level_data_path).new()
-	actors = level_data.actors
-	initial_state_vector = level_data.initial_state_vector
 	initial_state = TimeState.new(level_data.actors, level_data.initial_state_vector)
-	world_path = level_data.world_path
-	
-	$HBoxContainer/PanelContainer/VBoxContainer/Label.text = level_data.description
 	
 	head_column.initialise_code_headers(level_data)
 	head_column.connect("column_selected", self, "on_code_column_selected")
+	
 	code_columns.initialise_code_columns(level_data, initial_state)
 	code_columns.connect("code_block_added", self, "on_code_block_added")
 	code_columns.connect("code_block_changed", self, "on_code_block_changed")
@@ -47,59 +31,58 @@ func initialise(level_data_path):
 	code_columns.connect("code_block_preview_end", self, "on_code_block_preview_end")
 	code_columns.connect("code_column_selected", self, "on_code_column_selected")
 	code_columns.connect("code_column_removed", self, "on_code_column_removed")
+	
 	footer_column.initialise_code_footers(level_data)
 	update_final_probabilities()
-	world_viewer.initialise_world_viewer(initial_state, world_path)
+	world_viewer.initialise_world_viewer(initial_state, level_data.world_path)
 
 
 
-func change_time(new_time):
+func _change_time_instant(new_time:int) -> void:
 	if current_time != new_time:
-		ui_set_time(new_time)
-		update_world_container()
+		_ui_change_time(new_time)
+		_update_world_viewer_instant()
 
 
-func animate_time(new_time):
+func _change_time_animate(new_time:int) -> void:
 	var difference_matrix:SparseMatrix = GateBuilder.new_identity(initial_state.get_world_count())
-	print("===")
-	if new_time > current_time:
-		for time in range(new_time, current_time, -1):
-			print(time)
-			difference_matrix = difference_matrix.multiply(get_state_at_time(time).get_forward_matrix())
-		ui_set_time(new_time)
-		world_viewer.apply_matrix(get_state_at_time(current_time), difference_matrix)
-		print("---")
-		difference_matrix.print_matrix()
-	elif new_time < current_time:
-		for time in range(new_time + 1, current_time + 1):
-			print(time)
-			difference_matrix = difference_matrix.multiply(get_state_at_time(time).get_backward_matrix())
-		ui_set_time(new_time)
-		world_viewer.apply_matrix(get_state_at_time(current_time), difference_matrix)
-		print("---")
-		difference_matrix.print_matrix()
+	if new_time != current_time:
+		var column_range
+		if new_time > current_time:
+			column_range = range(new_time, current_time, -1)
+		elif new_time < current_time:
+			column_range = range(new_time + 1, current_time + 1)
+		for time in column_range:
+				difference_matrix = difference_matrix.multiply(get_state_at_time(time).get_forward_matrix())
+		_ui_change_time(new_time)
+		_update_world_viewer_animate(difference_matrix)
 
 
-func ui_set_time(new_time):
+func _ui_change_time(new_time:int) -> void:
 	head_column.set_column_selected(new_time == 0)
 	code_columns.select_column(new_time - 1)
 	current_time = new_time
 
 
-func update_world_container():
+func _update_world_viewer_instant() -> void:
 	var new_state = get_state_at_time(current_time)
 	world_viewer.set_state(new_state)
 
 
-func get_state_at_time(time):
+func _update_world_viewer_animate(difference_matrix: SparseMatrix) -> void:
+	var new_state : TimeState = get_state_at_time(current_time)
+	world_viewer.apply_matrix(new_state, difference_matrix)
+
+
+func get_state_at_time(time:int) -> TimeState:
 	if time == 0:
 		return initial_state
 	else:
 		return code_columns.get_state(time - 1)
 
 
-func update_states_from(column_id):
-	ui_set_time(column_id + 1)
+func update_states_from(column_id:int) -> void:
+	_change_time_instant(column_id + 1)
 	var backward_matrix:SparseMatrix = code_columns.get_backward_matrix(column_id)
 	if column_id <= code_columns.get_state_count():
 		code_columns.update_states_from(column_id, get_state_at_time(column_id))
@@ -109,14 +92,14 @@ func update_states_from(column_id):
 	world_viewer.apply_matrix(get_state_at_time(current_time), difference_matrix)
 
 
-func update_final_probabilities():
-	var probabilities = []
-	var final_state = get_state_at_time(code_columns.get_child_count()-1)
-	var all_conditions_met = true
-	for actor_id in range(actors.size()):
+func update_final_probabilities() -> void:
+	var probabilities := []
+	var final_state := get_state_at_time(code_columns.get_child_count()-1)
+	var all_conditions_met := true
+	for actor_id in range(level_data.actors.size()):
 		probabilities += [final_state.get_actor_probability(actor_id)]
-		if actors[actor_id].has("goal"):
-			if abs(probabilities[actor_id] - actors[actor_id].goal) > 0.00001:
+		if level_data.actors[actor_id].has("goal"):
+			if abs(probabilities[actor_id] - level_data.actors[actor_id].goal) > 0.00001:
 				all_conditions_met = false
 	if all_conditions_met:
 		complete_level_button.flat = false
@@ -140,38 +123,36 @@ signal code_column_selected
 signal code_column_to_be_removed
 """
 
-func on_code_block_added(column_id, actor_id, mt_code_block):
-	var code_block = Actions.mt_code_to_code_block(mt_code_block, actor_id, actors[actor_id])
+func on_code_block_added(column_id:int) -> void:
 	update_states_from(column_id)
 
-func on_code_block_changed(column_id, actor_id, mt_code_block):
+func on_code_block_changed(column_id:int) -> void:
 	update_states_from(column_id)
 
-func on_code_block_removed(column_id, actor_id):
+func on_code_block_removed(column_id:int) -> void:
 	update_states_from(column_id)
 
-func on_code_block_preview(column_id, actor_id, mt_code_block):
-	var code_block = Actions.mt_code_to_code_block(mt_code_block, actor_id, actors[actor_id])
+func on_code_block_preview(column_id:int, code_block:CodeBlock) -> void:
 	if column_id + 1 < code_columns.get_state_count():
-		change_time(column_id + 1)
+		_change_time_instant(column_id + 1)
 	else:
-		change_time(column_id)
+		_change_time_instant(column_id)
 	world_viewer.update_previews(code_block)
 
 
-func on_code_block_preview_end(column_id, actor_id):
+func on_code_block_preview_end(column_id:int, actor_id:int) -> void:
 	world_viewer.update_previews()
 
 
-func on_code_column_selected(column_id):
-	animate_time(column_id + 1)
+func on_code_column_selected(column_id:int) -> void:
+	_change_time_animate(column_id + 1)
 
-func on_code_column_removed(column_id):
+func on_code_column_removed(column_id:int) -> void:
 	if (column_id + 1) <= current_time:
-		ui_set_time(current_time-1)
+		_ui_change_time(current_time-1)
 
-func on_return_to_level_select():
+func on_return_to_level_select() -> void:
 	emit_signal("return_to_level_select")
 
-func on_level_complete():
+func on_level_complete() -> void:
 	emit_signal("return_to_level_select")

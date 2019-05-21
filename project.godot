@@ -14,10 +14,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://QuantumState/Actions.gd"
 }, {
+"base": "Reference",
+"class": "CodeBlock",
+"language": "GDScript",
+"path": "res://Enums/CodeBlock.gd"
+}, {
 "base": "Object",
 "class": "GateBuilder",
 "language": "GDScript",
 "path": "res://QuantumState/Matrix/GateBuilder.gd"
+}, {
+"base": "Resource",
+"class": "LevelData",
+"language": "GDScript",
+"path": "res://LevelData/LevelData.gd"
 }, {
 "base": "Object",
 "class": "SparseMatrix",
@@ -46,7 +56,9 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Actions": "",
+"CodeBlock": "",
 "GateBuilder": "",
+"LevelData": "",
 "SparseMatrix": "",
 "StateVector": "",
 "TimeState": "",

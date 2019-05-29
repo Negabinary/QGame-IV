@@ -4,6 +4,7 @@ export var level_path = ""
 
 
 func _ready():
+	# warning-ignore:return_value_discarded
 	self.connect("button_up", self, "_on_G0_button_up")
 
 

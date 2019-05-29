@@ -3,8 +3,8 @@ extends ColorRect
 class_name WorldViewer
 
 const VIEWPORT_SCENE = preload("res://Worlds/ViewportTemplate.tscn")
-const CODE_BLOCKS = preload("res://Enums/CodeBlocks.gd").CodeBlocks
-const CodeBlocks = preload("res://Enums/CodeBlocks.gd")
+const CODE_BLOCKS = preload("res://CodeBlocks/CodeBlocks.gd").CodeBlockID
+const CodeBlocks = preload("res://CodeBlocks/CodeBlocks.gd")
 
 var rows : int
 var columns : int

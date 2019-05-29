@@ -1,9 +1,9 @@
 extends Control
 
-const CODE_BLOCK_TEXTURES = preload("res://Enums/CodeBlocks.gd").CODE_BLOCK_TEXTURES
+const CODE_BLOCK_TEXTURES = preload("res://CodeBlocks/CodeBlocks.gd").CODE_BLOCK_TEXTURES
 
 
-func set_drag(new_id):
+func set_drag(new_id:int):
 	visible = true
 	get_children()[new_id].visible = true
 

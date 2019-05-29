@@ -1,5 +1,8 @@
 extends TextureButton
-const CODE_BLOCKS = preload("res://Enums/CodeBlocks.gd").CodeBlocks
+
+class_name CodeShelfBlock
+
+const CODE_BLOCKS = preload("res://CodeBlocks/CodeBlocks.gd").CodeBlockID
 const CODE_BLOCK_MOUSE_POINTER = preload("res://CodingUI/CodeBlockMouseFollower.tscn")
 
 export (CODE_BLOCKS) var dragging_id
@@ -11,7 +14,8 @@ func _ready():
 
 func get_drag_data(position):
 	set_drag_preview(_make_drag_preview())
-	return {"drag_type":"code_block", "code_block":dragging_id}
+	var code_block = CodeBlocks.new_code_block(dragging_id)
+	return {"drag_type":"code_block", "code_block":code_block}
 
 
 func _make_drag_preview():

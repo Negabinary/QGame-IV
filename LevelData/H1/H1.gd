@@ -1,5 +1,5 @@
-const WORLD_CHARACTERS = preload("res://Enums/WorldCharacters.gd").WorldCharacters
-const CodeBlocks = preload("res://Enums/CodeBlocks.gd").CodeBlocks
+const WORLD_CHARACTERS = preload("res://Actors/WorldCharacters.gd").WorldCharacters
+const CodeBlocks = preload("res://CodeBlocks/CodeBlocks.gd").CodeBlockID
 
 var world_path = "res://LevelData/H1/H1World.tscn"
 

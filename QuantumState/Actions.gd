@@ -1,17 +1,12 @@
 class_name Actions
 
-const CODE_BLOCKS = preload("res://Enums/CodeBlocks.gd").CodeBlocks
-const CodeBlocks = preload("res://Enums/CodeBlocks.gd")
-
 var total_matrix : SparseMatrix
 var total_matrix_inverse : SparseMatrix
-var code_array := []
 var code_block_array := []
 
 
-func _init(code_array, actors, world_count):
-	self.code_array = code_array
-	self.code_block_array = _mt_code_array_to_code_block_array(code_array, actors)
+func _init(code_block_array, actors, world_count):
+	self.code_block_array = code_block_array
 	self.total_matrix = calculate_total_matrix(world_count)
 	self.total_matrix_inverse = self.total_matrix
 
@@ -24,18 +19,24 @@ func _mt_code_array_to_code_block_array(code_array, actors):
 
 static func mt_code_to_code_block(old_code, actor_id, actor):
 	match old_code:
-		CODE_BLOCKS.SWORD:
-			return CodeBlocks.CodeBlockSword.new(actor_id, actor)
-		CODE_BLOCKS.HADAMARD:
-			return CodeBlocks.CodeBlockHadamard.new(actor_id, actor)
-		CODE_BLOCKS.CONFIDENT_SCOUT:
-			return CodeBlocks.CodeBlockConfidentScout.new(actor_id, actor)
-		CODE_BLOCKS.TIMID_SCOUT:
-			return CodeBlocks.CodeBlockTimidScout.new(actor_id, actor)
-		CODE_BLOCKS.CONSULT_ORACLE:
-			return CodeBlocks.CodeBlockConsultOracle.new(actor_id, actor)
+		CodeBlocks.CodeBlockID.SWORD:
+			var code_block = CodeBlocks.CodeBlockSword.new()
+			return code_block.set_actor(actor_id, actor)
+		CodeBlocks.CodeBlockID.HADAMARD:
+			var code_block = CodeBlocks.CodeBlockHadamard.new()
+			return code_block.set_actor(actor_id, actor)
+		CodeBlocks.CodeBlockID.CONFIDENT_SCOUT:
+			var code_block = CodeBlocks.CodeBlockConfidentScout.new()
+			return code_block.set_actor(actor_id, actor)
+		CodeBlocks.CodeBlockID.TIMID_SCOUT:
+			var code_block = CodeBlocks.CodeBlockTimidScout.new()
+			return code_block.set_actor(actor_id, actor)
+		CodeBlocks.CodeBlockID.CONSULT_ORACLE:
+			var code_block = CodeBlocks.CodeBlockConsultOracle.new()
+			return code_block.set_actor(actor_id, actor)
 		null:
-			return CodeBlocks.CodeBlockNull.new(actor_id, actor)
+			var code_block = CodeBlocks.CodeBlockNull.new()
+			return code_block.set_actor(actor_id, actor)
 
 func calculate_total_matrix(world_count : int) -> SparseMatrix:
 	var affected_worlds : Array = get_affected_worlds(world_count)
@@ -65,9 +66,6 @@ func get_affected_worlds_preview(world_count, preview_code_block):
 
 func apply_actions(state_vector : StateVector) -> StateVector:
 	return total_matrix.multiply_vector(state_vector)
-
-func get_code_array():
-	return code_array
 
 func get_code_block_array():
 	return code_block_array

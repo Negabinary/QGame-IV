@@ -1,6 +1,6 @@
 extends VBoxContainer
 
-const WORLD_CHARACTERS = preload("res://Enums/WorldCharacters.gd")
+const WORLD_CHARACTERS = preload("res://Actors/WorldCharacters.gd")
 const Actions = preload("res://QuantumState/Actions.gd")
 const TimeState = preload("res://QuantumState/TimeState.gd")
 
@@ -8,7 +8,8 @@ onready var head_column := $CodeArea/VBoxContainer/PanelContainer/HBoxContainer/
 onready var code_columns :=$CodeArea/VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/CodeColumns
 onready var footer_column := $CodeArea/VBoxContainer/PanelContainer/HBoxContainer/FooterColumn
 onready var world_viewer := $HBoxContainer/WorldViewerContainer/WorldViewer
-onready var complete_level_button := $CodeArea/VBoxContainer/CodeBlockShelf/HBoxContainer2/CompleteLevelButton
+onready var complete_level_button := $CodeArea/VBoxContainer/InterfaceShelf/HBoxContainer2/CompleteLevelButton
+onready var code_block_shelf := $CodeArea/VBoxContainer/InterfaceShelf/HBoxContainer2/CodeBlockShelf
 
 var level_data # Untyped because level_data is currently messy; must fix.
 var initial_state : TimeState
@@ -35,7 +36,23 @@ func initialise(level_data_path:String) -> void:
 	footer_column.initialise_code_footers(level_data)
 	update_final_probabilities()
 	world_viewer.initialise_world_viewer(initial_state, level_data.world_path)
+	
+	_set_up_code_block_shelf(level_data.blocks)
 
+
+func _set_up_code_block_shelf(code_block_ids:Array) -> void:
+	var code_block_since_separator := true
+	for node in code_block_shelf.get_children():
+		if node is CodeShelfBlock:
+			if node.dragging_id in code_block_ids:
+				code_block_since_separator = true
+			else:
+				node.hide()
+		elif node is VSeparator:
+			if code_block_since_separator == true:
+				code_block_since_separator = false
+			else:
+				node.hide()
 
 
 func _change_time_instant(new_time:int) -> void:

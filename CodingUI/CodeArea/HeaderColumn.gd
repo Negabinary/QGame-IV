@@ -1,7 +1,7 @@
 extends PanelContainer
 
 const HEADER_SCENE = preload("res://CodingUI/CodeArea/Header.tscn")
-const WORLD_CHARACTERS = preload("res://Enums/WorldCharacters.gd")
+const WORLD_CHARACTERS = preload("res://Actors/WorldCharacters.gd")
 
 func initialise_code_headers(level_data):
 	for actor in level_data.actors:

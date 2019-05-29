@@ -14,14 +14,14 @@ func initialise(loaded_world):
 	var world = loaded_world.instance()
 	material = material.duplicate()
 	$b.add_child(world)
-	world.initialise()
+	world.initialise(rect_size)
 
 func update_state(new_time_state, new_world_id, max_state, preview, world_value:Vector2):
 	time_state = new_time_state
 	world_id = new_world_id
 	var qubit_count = time_state.get_qubit_count()
 	var world_state_array = _get_world_state_array(world_id, qubit_count)
-	var code_array = time_state.get_qubit_code_array()
+	var code_array = time_state.get_qubit_code_block_array()
 	var world_active = world_id in time_state.get_affected_worlds()
 	
 	var world_preview_active
@@ -70,18 +70,6 @@ func adjust_anchor(bounds):
 
 func animate_anchor(bounds, new_frame_value):
 	var tween = $Tween
-	
-	"""
-	tween.interpolate_property(self, "anchor_left", anchor_left, bounds[0], ANIMATION_TIME, tween.TRANS_QUINT , tween.EASE_OUT)
-	tween.interpolate_property(self, "anchor_right", anchor_right, bounds[1], ANIMATION_TIME, tween.TRANS_QUINT , tween.EASE_OUT)
-	tween.interpolate_property(self, "anchor_top", anchor_top, bounds[2], ANIMATION_TIME, tween.TRANS_QUINT , tween.EASE_OUT)
-	tween.interpolate_property(self, "anchor_bottom", anchor_bottom, bounds[3], ANIMATION_TIME, tween.TRANS_QUINT , tween.EASE_OUT)
-	
-	tween.interpolate_property(self, "margin_left", 1, 1, ANIMATION_TIME, tween.TRANS_QUINT , tween.EASE_OUT)
-	tween.interpolate_property(self, "margin_right", -1, -1, ANIMATION_TIME, tween.TRANS_QUINT , tween.EASE_OUT)
-	tween.interpolate_property(self, "margin_top", 1, 1, ANIMATION_TIME, tween.TRANS_QUINT , tween.EASE_OUT)
-	tween.interpolate_property(self, "margin_bottom", -1, -1, ANIMATION_TIME, tween.TRANS_QUINT , tween.EASE_OUT)
-	"""
 	
 	anchor_left = bounds[0]
 	anchor_right = bounds[1]

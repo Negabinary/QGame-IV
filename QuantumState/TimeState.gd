@@ -6,10 +6,10 @@ var state_vector : StateVector
 var qubit_count : int
 
 
-func _init(actors, state_vector, code_array = null):
-	if code_array == null:
-		code_array = [null]
-		code_array.resize(actors.size())
+func _init(actors:Array, state_vector:PoolVector2Array, code_array:Array = []):
+	if code_array == []:
+		for actor in actors:
+			code_array += [CodeBlocks.new_code_block()]
 	self.actors = actors
 	self.actions = Actions.new(code_array, actors, state_vector.size())
 	self.state_vector = StateVector.new(state_vector)
@@ -41,11 +41,11 @@ func get_world_state(world_id) -> Vector2:
 func get_world_count() -> int:
 	return get_vector().size()
 
-func get_code_array():
-	return actions.get_code_array()
+func get_code_block_array() -> Array:
+	return actions.get_code_block_array()
 
-func get_qubit_code_array():
-	var actor_code_array = get_code_array()
+func get_qubit_code_block_array() -> Array:
+	var actor_code_array = get_code_block_array()
 	var qubit_code_array = []
 	for qubit_id in range(qubit_count):
 		qubit_code_array += [null]

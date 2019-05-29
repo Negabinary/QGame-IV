@@ -17,7 +17,17 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "CodeBlock",
 "language": "GDScript",
-"path": "res://Enums/CodeBlock.gd"
+"path": "res://CodeBlocks/CodeBlock.gd"
+}, {
+"base": "Node",
+"class": "CodeBlocks",
+"language": "GDScript",
+"path": "res://CodeBlocks/CodeBlocks.gd"
+}, {
+"base": "TextureButton",
+"class": "CodeShelfBlock",
+"language": "GDScript",
+"path": "res://CodingUI/CodeBlockShelf/ShelfBlock.gd"
 }, {
 "base": "Object",
 "class": "GateBuilder",
@@ -57,6 +67,8 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Actions": "",
 "CodeBlock": "",
+"CodeBlocks": "",
+"CodeShelfBlock": "",
 "GateBuilder": "",
 "LevelData": "",
 "SparseMatrix": "",
@@ -68,13 +80,18 @@ _global_script_class_icons={
 
 [application]
 
-config/name="QGame-IV"
+config/name="Quantum Kings"
 run/main_scene="res://Main.tscn"
-config/icon="res://icon.png"
+boot_splash/bg_color=Color( 0.12549, 0.211765, 0.172549, 1 )
+config/icon="res://Graphics/png/sword_square.png"
 
 [debug]
 
 gdscript/warnings/enable=false
+gdscript/warnings/unsafe_property_access=true
+gdscript/warnings/unsafe_method_access=true
+gdscript/warnings/unsafe_cast=true
+gdscript/warnings/unsafe_call_argument=true
 
 [display]
 

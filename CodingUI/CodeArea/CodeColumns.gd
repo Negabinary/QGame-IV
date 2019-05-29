@@ -84,10 +84,9 @@ func on_block_changed(column_id, actor_id, code_block):
 	emit_signal("code_block_changed", column_id)
 
 func on_block_removed(column_id, actor_id):
-	emit_signal("code_block_removed")
+	emit_signal("code_block_removed", column_id)
 
-func on_block_preview(column_id, actor_id, mt_code_block):
-	var code_block:CodeBlock = Actions.mt_code_to_code_block(mt_code_block, actor_id, actors[actor_id])
+func on_block_preview(column_id, actor_id, code_block:CodeBlock):
 	emit_signal("code_block_preview", column_id, code_block)
 
 func on_block_preview_end(column_id, actor_id):

@@ -1,20 +1,18 @@
 extends Node
 
-const CODE_BLOCKS = preload("res://Enums/CodeBlocks.gd").CodeBlocks
-
 onready var characters = $Characters.get_children()
 
 
-func initialise():
-	$Camera2D.initialise()
+func initialise(viewport_size):
+	$Camera2D.initialise(viewport_size)
 
 
-func update_state(new_state, code_array, active, preview, preview_active):
+func update_state(new_state, code_block_array, active, preview, preview_active):
 	for i in range(new_state.size()):
 		if new_state[i] == 1:
 			characters[i].get_node("Off").visible = false
 			characters[i].get_node("OffSword").visible = false
-			if code_array[i] == CODE_BLOCKS.SWORD and active:
+			if code_block_array[i] is CodeBlocks.CodeBlockSword and active:
 				characters[i].get_node("On").visible = false
 				characters[i].get_node("OnSword").visible = true
 			else:
@@ -23,7 +21,7 @@ func update_state(new_state, code_array, active, preview, preview_active):
 		if new_state[i] == 0:
 			characters[i].get_node("On").visible = false
 			characters[i].get_node("OnSword").visible = false
-			if code_array[i] == CODE_BLOCKS.SWORD and active:
+			if code_block_array[i] is CodeBlocks.CodeBlockSword and active:
 				characters[i].get_node("Off").visible = false
 				characters[i].get_node("OffSword").visible = true
 			else:

@@ -145,26 +145,24 @@ margin_right = 1024.0
 margin_bottom = 128.0
 custom_constants/separation = 5
 
-[node name="CodeBlockShelf" type="PanelContainer" parent="Main/CodeArea/VBoxContainer"]
-editor/display_folded = true
+[node name="InterfaceShelf" type="PanelContainer" parent="Main/CodeArea/VBoxContainer"]
 margin_right = 1024.0
 margin_bottom = 60.0
 rect_min_size = Vector2( 0, 60 )
 custom_styles/panel = SubResource( 7 )
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Main/CodeArea/VBoxContainer/CodeBlockShelf"]
-editor/display_folded = true
+[node name="HBoxContainer2" type="HBoxContainer" parent="Main/CodeArea/VBoxContainer/InterfaceShelf"]
 margin_left = 5.0
 margin_top = 5.0
 margin_right = 1019.0
 margin_bottom = 55.0
 
-[node name="ReturnButton" type="Button" parent="Main/CodeArea/VBoxContainer/CodeBlockShelf/HBoxContainer2"]
+[node name="ReturnButton" type="Button" parent="Main/CodeArea/VBoxContainer/InterfaceShelf/HBoxContainer2"]
 margin_right = 138.0
 margin_bottom = 50.0
 text = "Back to Level Select"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Main/CodeArea/VBoxContainer/CodeBlockShelf/HBoxContainer2"]
+[node name="CodeBlockShelf" type="HBoxContainer" parent="Main/CodeArea/VBoxContainer/InterfaceShelf/HBoxContainer2"]
 margin_left = 142.0
 margin_right = 845.0
 margin_bottom = 50.0
@@ -172,12 +170,12 @@ size_flags_horizontal = 3
 custom_constants/separation = 10
 alignment = 1
 
-[node name="VSeparator2" type="VSeparator" parent="Main/CodeArea/VBoxContainer/CodeBlockShelf/HBoxContainer2/HBoxContainer"]
+[node name="VSeparator2" type="VSeparator" parent="Main/CodeArea/VBoxContainer/InterfaceShelf/HBoxContainer2/CodeBlockShelf"]
 margin_left = 185.0
 margin_right = 189.0
 margin_bottom = 50.0
 
-[node name="Button" type="TextureButton" parent="Main/CodeArea/VBoxContainer/CodeBlockShelf/HBoxContainer2/HBoxContainer"]
+[node name="Button" type="TextureButton" parent="Main/CodeArea/VBoxContainer/InterfaceShelf/HBoxContainer2/CodeBlockShelf"]
 margin_left = 199.0
 margin_right = 249.0
 margin_bottom = 50.0
@@ -188,7 +186,7 @@ action_mode = 0
 texture_normal = ExtResource( 4 )
 script = ExtResource( 5 )
 
-[node name="Button3" type="TextureButton" parent="Main/CodeArea/VBoxContainer/CodeBlockShelf/HBoxContainer2/HBoxContainer"]
+[node name="Button3" type="TextureButton" parent="Main/CodeArea/VBoxContainer/InterfaceShelf/HBoxContainer2/CodeBlockShelf"]
 margin_left = 259.0
 margin_right = 309.0
 margin_bottom = 50.0
@@ -199,12 +197,12 @@ texture_normal = ExtResource( 6 )
 script = ExtResource( 5 )
 dragging_id = 1
 
-[node name="VSeparator" type="VSeparator" parent="Main/CodeArea/VBoxContainer/CodeBlockShelf/HBoxContainer2/HBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="Main/CodeArea/VBoxContainer/InterfaceShelf/HBoxContainer2/CodeBlockShelf"]
 margin_left = 319.0
 margin_right = 323.0
 margin_bottom = 50.0
 
-[node name="Button4" type="TextureButton" parent="Main/CodeArea/VBoxContainer/CodeBlockShelf/HBoxContainer2/HBoxContainer"]
+[node name="Button4" type="TextureButton" parent="Main/CodeArea/VBoxContainer/InterfaceShelf/HBoxContainer2/CodeBlockShelf"]
 margin_left = 333.0
 margin_right = 383.0
 margin_bottom = 50.0
@@ -215,7 +213,7 @@ texture_normal = ExtResource( 7 )
 script = ExtResource( 5 )
 dragging_id = 2
 
-[node name="Button2" type="TextureButton" parent="Main/CodeArea/VBoxContainer/CodeBlockShelf/HBoxContainer2/HBoxContainer"]
+[node name="Button2" type="TextureButton" parent="Main/CodeArea/VBoxContainer/InterfaceShelf/HBoxContainer2/CodeBlockShelf"]
 margin_left = 393.0
 margin_right = 443.0
 margin_bottom = 50.0
@@ -226,7 +224,7 @@ texture_normal = ExtResource( 8 )
 script = ExtResource( 5 )
 dragging_id = 3
 
-[node name="Button5" type="TextureButton" parent="Main/CodeArea/VBoxContainer/CodeBlockShelf/HBoxContainer2/HBoxContainer"]
+[node name="Button5" type="TextureButton" parent="Main/CodeArea/VBoxContainer/InterfaceShelf/HBoxContainer2/CodeBlockShelf"]
 margin_left = 453.0
 margin_right = 503.0
 margin_bottom = 50.0
@@ -237,12 +235,12 @@ texture_normal = ExtResource( 9 )
 script = ExtResource( 5 )
 dragging_id = 4
 
-[node name="VSeparator3" type="VSeparator" parent="Main/CodeArea/VBoxContainer/CodeBlockShelf/HBoxContainer2/HBoxContainer"]
+[node name="VSeparator3" type="VSeparator" parent="Main/CodeArea/VBoxContainer/InterfaceShelf/HBoxContainer2/CodeBlockShelf"]
 margin_left = 513.0
 margin_right = 517.0
 margin_bottom = 50.0
 
-[node name="CompleteLevelButton" type="Button" parent="Main/CodeArea/VBoxContainer/CodeBlockShelf/HBoxContainer2"]
+[node name="CompleteLevelButton" type="Button" parent="Main/CodeArea/VBoxContainer/InterfaceShelf/HBoxContainer2"]
 margin_left = 849.0
 margin_right = 1014.0
 margin_bottom = 50.0
@@ -356,5 +354,5 @@ margin_top = 118.0
 margin_right = 1024.0
 margin_bottom = 128.0
 custom_styles/panel = SubResource( 7 )
-[connection signal="button_up" from="Main/CodeArea/VBoxContainer/CodeBlockShelf/HBoxContainer2/ReturnButton" to="Main" method="on_return_to_level_select"]
-[connection signal="button_up" from="Main/CodeArea/VBoxContainer/CodeBlockShelf/HBoxContainer2/CompleteLevelButton" to="Main" method="on_level_complete"]
+[connection signal="button_up" from="Main/CodeArea/VBoxContainer/InterfaceShelf/HBoxContainer2/ReturnButton" to="Main" method="on_return_to_level_select"]
+[connection signal="button_up" from="Main/CodeArea/VBoxContainer/InterfaceShelf/HBoxContainer2/CompleteLevelButton" to="Main" method="on_level_complete"]

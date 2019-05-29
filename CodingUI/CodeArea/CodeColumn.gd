@@ -17,7 +17,7 @@ func _is_empty():
 	var code_array = get_code_array()
 	var is_empty = true
 	for i in code_array:
-		if i != null:
+		if not i is CodeBlocks.CodeBlockNull:
 			is_empty = false
 			break
 	return is_empty

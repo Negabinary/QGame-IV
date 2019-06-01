@@ -1,9 +1,12 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://Worlds/WorldScript.gd" type="Script" id=1]
-[ext_resource path="res://Worlds/WorldCamera.gd" type="Script" id=2]
+[ext_resource path="res://Main/Editor/WorldViewer/WorldScript.gd" type="Script" id=1]
+[ext_resource path="res://Main/Editor/WorldViewer/WorldCamera.gd" type="Script" id=2]
 [ext_resource path="res://Graphics/King/enemy_on.png" type="Texture" id=3]
 [ext_resource path="res://Graphics/King/enemy_off.png" type="Texture" id=4]
+
+
+
 
 [sub_resource type="StreamTexture" id=1]
 

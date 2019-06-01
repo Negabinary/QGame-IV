@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="StreamTexture" id=1]
+flags = 4
+load_path = "res://.import/cat_on.png-9b09e993773c2f18d6cf09fc00f7e23f.stex"
+
+[sub_resource type="StreamTexture" id=2]
+flags = 4
+load_path = "res://.import/cat_off.png-cb792d929892658f1743649d69ff74ff.stex"
+
+[node name="Cat1" type="Node2D"]
+editor/display_folded = true
+position = Vector2( 70.9899, 6.39769 )
+
+[node name="On" type="Sprite" parent="."]
+texture = SubResource( 1 )
+
+[node name="OnSword" type="Sprite" parent="."]
+visible = false
+texture = SubResource( 1 )
+
+[node name="Off" type="Sprite" parent="."]
+visible = false
+texture = SubResource( 2 )
+
+[node name="OffSword" type="Sprite" parent="."]
+visible = false
+texture = SubResource( 2 )

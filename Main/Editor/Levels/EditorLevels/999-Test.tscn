@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Theme/main_theme.tres" type="Theme" id=1]
+[ext_resource path="res://Main/Editor/WorldViewer/WorldViewer.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Main/Editor/CodeArea/CodeArea.tscn" type="PackedScene" id=3]
+
+
+[sub_resource type="Shader" id=1]
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+
+[sub_resource type="GDScript" id=3]
+script/source = "extends Editor
+
+func _init().():
+	world_path = \"res://Main/Editor/Levels/WorldLevels/999-Test.tscn\"
+	actors = [
+    	{\"type\": WORLD_CHARACTERS.WorldCharacters.CAT, \"qubit\":0},
+		{\"type\": WORLD_CHARACTERS.WorldCharacters.CAT, \"qubit\":1}]
+	initial_state_vector = PoolVector2Array([
+		Vector2(1,0), Vector2(0,0), Vector2(0,0), Vector2(0,0)])
+	blocks = [CodeBlocks.CodeBlockID.SWORD, CodeBlocks.CodeBlockID.HADAMARD, CodeBlocks.CodeBlockID.TIMID_SCOUT, CodeBlocks.CodeBlockID.CONFIDENT_SCOUT, CodeBlocks.CodeBlockID.CONSULT_ORACLE]"
+
+[node name="Editor" type="ColorRect"]
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+color = Color( 0.0470588, 0.0784314, 0.0627451, 1 )
+
+[node name="Main" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 0
+script = SubResource( 3 )
+
+[node name="WorldViewer" parent="Main" instance=ExtResource( 2 )]
+
+[node name="CodeArea" parent="Main" instance=ExtResource( 3 )]

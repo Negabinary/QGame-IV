@@ -1,0 +1,265 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://Theme/main_theme.tres" type="Theme" id=1]
+[ext_resource path="res://Graphics/png/sword_square.png" type="Texture" id=2]
+[ext_resource path="res://Main/Editor/CodeArea/ShelfBlock.gd" type="Script" id=3]
+[ext_resource path="res://Graphics/png/hadamard_square.png" type="Texture" id=4]
+[ext_resource path="res://Graphics/png/timid_scout_square.png" type="Texture" id=5]
+[ext_resource path="res://Graphics/png/confindent_scout_square.png" type="Texture" id=6]
+[ext_resource path="res://Graphics/png/oracle_square.png" type="Texture" id=7]
+[ext_resource path="res://Main/Editor/CodeArea/HeaderColumn.gd" type="Script" id=8]
+[ext_resource path="res://Main/Editor/CodeArea/CodeColumns.gd" type="Script" id=9]
+[ext_resource path="res://Main/Editor/CodeArea/FooterColumn.gd" type="Script" id=10]
+
+[sub_resource type="StyleBoxFlat" id=1]
+content_margin_left = 0.0
+content_margin_right = 0.0
+content_margin_top = 0.0
+content_margin_bottom = 0.0
+bg_color = Color( 0.12549, 0.211765, 0.172549, 1 )
+shadow_color = Color( 0.12549, 0.211765, 0.172549, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+content_margin_left = 5.0
+content_margin_right = 5.0
+content_margin_top = 5.0
+content_margin_bottom = 5.0
+bg_color = Color( 0.0709534, 0.117188, 0.096172, 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+content_margin_left = 5.0
+content_margin_right = 5.0
+content_margin_top = 5.0
+content_margin_bottom = 5.0
+draw_center = false
+
+[sub_resource type="StyleBoxFlat" id=4]
+content_margin_left = 5.0
+content_margin_right = 5.0
+content_margin_top = 5.0
+content_margin_bottom = 5.0
+draw_center = false
+
+[node name="CodeArea" type="PanelContainer"]
+margin_top = 572.0
+margin_right = 1024.0
+margin_bottom = 700.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme = ExtResource( 1 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_right = 1024.0
+margin_bottom = 128.0
+custom_constants/separation = 5
+
+[node name="InterfaceShelf" type="PanelContainer" parent="VBoxContainer"]
+margin_right = 1024.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 0, 60 )
+custom_styles/panel = SubResource( 2 )
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/InterfaceShelf"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 1019.0
+margin_bottom = 55.0
+
+[node name="ReturnButton" type="Button" parent="VBoxContainer/InterfaceShelf/HBoxContainer2"]
+margin_right = 165.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 165, 0 )
+text = "Back to Level Select"
+
+[node name="CodeBlockShelf" type="HBoxContainer" parent="VBoxContainer/InterfaceShelf/HBoxContainer2"]
+margin_left = 169.0
+margin_right = 845.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+custom_constants/separation = 10
+alignment = 1
+
+[node name="VSeparator2" type="VSeparator" parent="VBoxContainer/InterfaceShelf/HBoxContainer2/CodeBlockShelf"]
+margin_left = 172.0
+margin_right = 176.0
+margin_bottom = 50.0
+
+[node name="Button" type="TextureButton" parent="VBoxContainer/InterfaceShelf/HBoxContainer2/CodeBlockShelf"]
+margin_left = 186.0
+margin_right = 236.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+action_mode = 0
+texture_normal = ExtResource( 2 )
+script = ExtResource( 3 )
+
+[node name="Button3" type="TextureButton" parent="VBoxContainer/InterfaceShelf/HBoxContainer2/CodeBlockShelf"]
+margin_left = 246.0
+margin_right = 296.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture_normal = ExtResource( 4 )
+script = ExtResource( 3 )
+dragging_id = 1
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/InterfaceShelf/HBoxContainer2/CodeBlockShelf"]
+margin_left = 306.0
+margin_right = 310.0
+margin_bottom = 50.0
+
+[node name="Button4" type="TextureButton" parent="VBoxContainer/InterfaceShelf/HBoxContainer2/CodeBlockShelf"]
+margin_left = 320.0
+margin_right = 370.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture_normal = ExtResource( 5 )
+script = ExtResource( 3 )
+dragging_id = 2
+
+[node name="Button2" type="TextureButton" parent="VBoxContainer/InterfaceShelf/HBoxContainer2/CodeBlockShelf"]
+margin_left = 380.0
+margin_right = 430.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture_normal = ExtResource( 6 )
+script = ExtResource( 3 )
+dragging_id = 3
+
+[node name="Button5" type="TextureButton" parent="VBoxContainer/InterfaceShelf/HBoxContainer2/CodeBlockShelf"]
+margin_left = 440.0
+margin_right = 490.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture_normal = ExtResource( 7 )
+script = ExtResource( 3 )
+dragging_id = 4
+
+[node name="VSeparator3" type="VSeparator" parent="VBoxContainer/InterfaceShelf/HBoxContainer2/CodeBlockShelf"]
+margin_left = 500.0
+margin_right = 504.0
+margin_bottom = 50.0
+
+[node name="CompleteLevelButton" type="Button" parent="VBoxContainer/InterfaceShelf/HBoxContainer2"]
+margin_left = 849.0
+margin_right = 1014.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 165, 0 )
+disabled = true
+text = "Complete Level"
+flat = true
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+margin_top = 65.0
+margin_right = 1024.0
+margin_bottom = 113.0
+custom_styles/panel = SubResource( 3 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 1019.0
+margin_bottom = 43.0
+size_flags_horizontal = 3
+
+[node name="HeaderColumn" type="PanelContainer" parent="VBoxContainer/PanelContainer/HBoxContainer"]
+margin_right = 36.0
+margin_bottom = 38.0
+custom_styles/panel = SubResource( 4 )
+script = ExtResource( 8 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer/HBoxContainer/HeaderColumn"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 31.0
+margin_bottom = 33.0
+
+[node name="Button" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/HeaderColumn/VBoxContainer"]
+margin_right = 26.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+toggle_mode = true
+pressed = true
+text = "[o]"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer/HBoxContainer/HeaderColumn/VBoxContainer"]
+margin_top = 28.0
+margin_right = 26.0
+margin_bottom = 28.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/PanelContainer/HBoxContainer"]
+editor/display_folded = true
+margin_left = 40.0
+margin_right = 842.0
+margin_bottom = 38.0
+size_flags_horizontal = 3
+scroll_vertical_enabled = false
+
+[node name="CodeColumns" type="HBoxContainer" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer"]
+margin_right = 802.0
+size_flags_horizontal = 3
+custom_constants/separation = 5
+script = ExtResource( 9 )
+
+[node name="FooterColumn" type="PanelContainer" parent="VBoxContainer/PanelContainer/HBoxContainer"]
+margin_left = 846.0
+margin_right = 1014.0
+margin_bottom = 38.0
+custom_styles/panel = SubResource( 2 )
+script = ExtResource( 10 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer/HBoxContainer/FooterColumn"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 163.0
+margin_bottom = 33.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer/HBoxContainer/FooterColumn/VBoxContainer"]
+margin_right = 158.0
+margin_bottom = 14.0
+
+[node name="Button" type="Label" parent="VBoxContainer/PanelContainer/HBoxContainer/FooterColumn/VBoxContainer/HBoxContainer"]
+margin_right = 50.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 50, 0 )
+size_flags_horizontal = 3
+text = "Death"
+align = 1
+
+[node name="Button2" type="Label" parent="VBoxContainer/PanelContainer/HBoxContainer/FooterColumn/VBoxContainer/HBoxContainer"]
+margin_left = 54.0
+margin_right = 104.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 50, 0 )
+size_flags_horizontal = 3
+text = "Goal"
+align = 1
+
+[node name="Button3" type="Label" parent="VBoxContainer/PanelContainer/HBoxContainer/FooterColumn/VBoxContainer/HBoxContainer"]
+margin_left = 108.0
+margin_right = 158.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 50, 0 )
+size_flags_horizontal = 3
+align = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer/HBoxContainer/FooterColumn/VBoxContainer"]
+margin_top = 18.0
+margin_right = 158.0
+margin_bottom = 18.0
+
+[node name="Panel" type="PanelContainer" parent="VBoxContainer"]
+margin_top = 118.0
+margin_right = 1024.0
+margin_bottom = 128.0
+custom_styles/panel = SubResource( 2 )

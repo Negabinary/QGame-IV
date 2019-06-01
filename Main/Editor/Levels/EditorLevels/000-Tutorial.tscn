@@ -1,0 +1,107 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Theme/main_theme.tres" type="Theme" id=1]
+[ext_resource path="res://Main/Editor/WorldViewer/TutorialWorldViewer.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Main/Editor/CodeArea/CodeArea.tscn" type="PackedScene" id=3]
+
+[sub_resource type="Shader" id=1]
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+
+[sub_resource type="GDScript" id=3]
+script/source = "extends Editor
+
+var stage:int = 1
+var parallel_world_viewer:PackedScene = load(\"res://Main/Editor/WorldViewer/WorldViewer.tscn\")
+
+func _init().():
+	world_path = \"res://Main/Editor/Levels/WorldLevels/000-Tutorial.tscn\"
+	actors = [
+    	{\"type\": WORLD_CHARACTERS.WorldCharacters.KING, \"qubit\":0, \"goal\":0}]
+	initial_state_vector = PoolVector2Array([
+		Vector2(1,0), Vector2(0,0)])
+	blocks  = [CodeBlocks.CodeBlockID.SWORD]
+
+func _update_level_progress() -> void:
+	var probabilities := _get_final_probabilities()
+	footer_column.update_probabilities(probabilities) 
+	var is_every_condition_met := _get_is_every_condition_met(probabilities)
+	
+	match stage:
+		1:
+			$TutoralText.text = \"Send a soldier in by dragging a sword icon to the timeline.\"
+			if code_columns.get_state_count() == 2:
+				$TutoralText.text = \"\"\"Why did you do that? Now there's someone at your throat.
+				Send another soldier in to fix this.\"\"\"
+				stage = 2
+		2:
+			if code_columns.get_state_count() == 3:
+				$TutoralText.text = \"\"\"Ok that was fun, let's do it again!\"\"\"
+				stage = 3
+		3:
+			if code_columns.get_state_count() == 4:
+				$TutoralText.text = \"Aaaaaah!\"
+				stage = 4
+		4:
+			if code_columns.get_state_count() == 5:
+				$TutoralText.text = \"\"\"So you've got two states, danger and no danger,
+				your view is now split into dangerous and safe halves.\"\"\"
+				stage = 5
+				var new_world_viewer_instance = parallel_world_viewer.instance()
+				remove_child($WorldViewer)
+				add_child(new_world_viewer_instance)
+				move_child(new_world_viewer_instance, 0)
+				new_world_viewer_instance.get_child(0).initialise_world_viewer(get_state_at_time(current_time-1), world_path)
+				world_viewer = new_world_viewer_instance.get_child(0)
+		5:
+			if code_columns.get_state_count() == 6:
+				$TutoralText.text = \"\"\"Ok, that's enoughs soldiers.
+				As the box at the end of the timeline says, the aim of this level is to be alive\"\"\"
+				stage = 6
+				blocks = []
+				_set_up_code_block_shelf(blocks)
+		6:
+			if is_every_condition_met:
+				$TutoralText.text = \"\"\"Success! Press 'Complete Level'.\"\"\"
+				stage = 7
+		
+		7:
+			if not is_every_condition_met:
+				$TutoralText.text = \"\"\"There are some goals in the bottom right corner.
+				Once all the goals are complete you can complete the level.\"\"\"
+				stage = 6
+	_update_continue_button(is_every_condition_met and stage >= 6)
+
+
+func on_code_column_removed(column_id:int) -> void:
+	if (column_id + 1) <= current_time:
+		_ui_change_time(current_time-1)
+		if stage < 5:
+			_update_world_viewer_instant()"
+
+[node name="Editor" type="ColorRect"]
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+color = Color( 0.0470588, 0.0784314, 0.0627451, 1 )
+
+[node name="Main" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 0
+script = SubResource( 3 )
+
+[node name="WorldViewer" parent="Main" instance=ExtResource( 2 )]
+margin_bottom = 522.0
+
+[node name="TutoralText" type="Label" parent="Main"]
+margin_top = 522.0
+margin_right = 1024.0
+margin_bottom = 572.0
+rect_min_size = Vector2( 0, 50 )
+text = "Tutorial Text Goes here"
+align = 1
+
+[node name="CodeArea" parent="Main" instance=ExtResource( 3 )]

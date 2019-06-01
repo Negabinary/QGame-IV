@@ -62,8 +62,8 @@ visible = false
 texture = SubResource( 5 )
 
 [node name="King4" type="Node2D" parent="Characters"]
-position = Vector2( 19.1942, 140.654 )
-scale = Vector2( 0.572201, 0.572201 )
+editor/display_folded = true
+position = Vector2( 37.428, 6.54469 )
 
 [node name="On" type="Sprite" parent="Characters/King4"]
 texture = SubResource( 2 )
@@ -81,11 +81,10 @@ visible = false
 texture = SubResource( 5 )
 
 [node name="King5" type="Node2D" parent="Characters"]
-position = Vector2( 586.746, 26.1541 )
-scale = Vector2( 0.586474, 0.586474 )
+editor/display_folded = true
+position = Vector2( 599.979, 12.9213 )
 
 [node name="On" type="Sprite" parent="Characters/King5"]
-position = Vector2( -85.2309, 154.965 )
 texture = SubResource( 2 )
 
 [node name="OnSword" type="Sprite" parent="Characters/King5"]
@@ -99,3 +98,4 @@ texture = SubResource( 4 )
 [node name="OffSword" type="Sprite" parent="Characters/King5"]
 visible = false
 texture = SubResource( 5 )
+

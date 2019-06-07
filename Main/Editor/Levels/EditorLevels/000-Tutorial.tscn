@@ -17,8 +17,7 @@ var parallel_world_viewer:PackedScene = load(\"res://Main/Editor/WorldViewer/Wor
 
 func _init().():
 	world_path = \"res://Main/Editor/Levels/WorldLevels/000-Tutorial.tscn\"
-	actors = [
-    	{\"type\": WORLD_CHARACTERS.WorldCharacters.KING, \"qubit\":0, \"goal\":0}]
+	actors = [ActorKing.new(0, 0, 0)]
 	initial_state_vector = PoolVector2Array([
 		Vector2(1,0), Vector2(0,0)])
 	blocks  = [CodeBlocks.CodeBlockID.SWORD]

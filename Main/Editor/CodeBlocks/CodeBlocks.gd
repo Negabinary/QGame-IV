@@ -42,20 +42,22 @@ class CodeBlockSword:
 	var code_block_id = 0
 	
 	func get_paired_world(world_id, affected_worlds):
+		var posbit = 1 << actor.get_qubit_id()
 		var filtered_worlds = get_guard_affected_worlds(affected_worlds)
 		if world_id in filtered_worlds:
-			return world_id ^ (1 << qubit_id)
+			return world_id ^ posbit
 		else:
 			return world_id
 	
 	func get_matrix(world_count:int, affected_worlds:Array) -> SparseMatrix:
+		var qubit_id = actor.get_qubit_id()
 		var filtered_worlds = get_guard_affected_worlds(affected_worlds)
 		return GateBuilder.new_not(world_count, qubit_id, filtered_worlds)
 	
 	func get_guard_affected_worlds(affected_worlds):
-		if actor.has("guard"):
+		if actor.has_method("old_get_guard_id"):
 			var filtered_worlds = []
-			var guard_qubit = actor.guard
+			var guard_qubit = actor.old_get_guard_id()
 			var guard_posbit = 1 << guard_qubit
 			for world_id in affected_worlds:
 				if world_id | guard_posbit == world_id:
@@ -71,6 +73,7 @@ class CodeBlockHadamard:
 	var code_block_id = 1
 	
 	func get_matrix(world_count:int, affected_worlds:Array) -> SparseMatrix:
+		var qubit_id = actor.get_qubit_id()
 		return GateBuilder.new_hadamard(world_count, qubit_id, affected_worlds)
 
 
@@ -86,6 +89,7 @@ class CodeBlockTimidScout:
 	
 	func filter_affected_worlds(affected_worlds):
 		var filtered_worlds = []
+		var qubit_id = actor.get_qubit_id()
 		var posbit = 1 << qubit_id
 		for world_id in affected_worlds:
 			if world_id | posbit != world_id:
@@ -100,6 +104,7 @@ class CodeBlockConfidentScout:
 	
 	func filter_affected_worlds(affected_worlds):
 		var filtered_worlds = []
+		var qubit_id = actor.get_qubit_id()
 		var posbit = 1 << qubit_id
 		for world_id in affected_worlds:
 			if world_id | posbit == world_id:
@@ -111,9 +116,9 @@ class CodeBlockConsultOracle:
 	extends CodeBlockCondition
 	
 	var code_block_id = 4
-	
+	"""
 	func filter_affected_worlds(affected_worlds):
-		var oracle_conditions = actor.conditions
+		var oracle_conditions = old_actor.conditions
 		for qubit_id in oracle_conditions:
 			var filtered_worlds = []
 			var posbit = 1 << qubit_id
@@ -122,3 +127,4 @@ class CodeBlockConsultOracle:
 					filtered_worlds += [world_id]
 			affected_worlds = filtered_worlds
 		return affected_worlds
+	"""

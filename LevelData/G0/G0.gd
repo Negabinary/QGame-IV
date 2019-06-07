@@ -2,7 +2,7 @@ var CODE_BLOCKS := CodeBlocks.CodeBlockID
 
 var world_path = "res://LevelData/G0/G0World.tscn"
 
-var actors = [
+var old_actors = [
     {"type": WORLD_CHARACTERS.WorldCharacters.KING, "qubit":0, "goal":0, "guard":1},
 	{"type": WORLD_CHARACTERS.WorldCharacters.GUARD, "qubit":1, "goal": 0},
 ]

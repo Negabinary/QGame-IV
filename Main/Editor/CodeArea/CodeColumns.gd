@@ -2,8 +2,8 @@ extends HBoxContainer
 
 const CODE_COLUMN = preload("CodeColumn.tscn")
 
-var actors
-var initial_state
+var actors : Array
+var initial_state : TimeState
 
 
 func initialise_code_columns(actors:Array, initial_state:TimeState) -> void:

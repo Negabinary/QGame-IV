@@ -4,8 +4,7 @@ const HEADER_SCENE = preload("Header.tscn")
 
 func initialise_code_headers(actors:Array):
 	for actor in actors:
-		var header_instance = WORLD_CHARACTERS.ICONS[actor.type].instance()
-		#header_instance.text = str(actor.type)
+		var header_instance = actor.get_icon().instance()
 		$VBoxContainer/VBoxContainer.add_child(header_instance)
 	
 	$VBoxContainer/Button.connect("toggled", self, "on_selected")

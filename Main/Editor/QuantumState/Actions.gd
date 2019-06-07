@@ -5,38 +5,11 @@ var total_matrix_inverse : SparseMatrix
 var code_block_array := []
 
 
-func _init(code_block_array, actors, world_count):
+func _init(code_block_array, world_count):
 	self.code_block_array = code_block_array
 	self.total_matrix = calculate_total_matrix(world_count)
 	self.total_matrix_inverse = self.total_matrix
 
-func _mt_code_array_to_code_block_array(code_array, actors):
-	var code_block_array = []
-	for actor_id in range(0, code_array.size()):
-		var code_block = code_array[actor_id]
-		code_block_array += [mt_code_to_code_block(code_block, actor_id, actors[actor_id])]
-	return code_block_array
-
-static func mt_code_to_code_block(old_code, actor_id, actor):
-	match old_code:
-		CodeBlocks.CodeBlockID.SWORD:
-			var code_block = CodeBlocks.CodeBlockSword.new()
-			return code_block.set_actor(actor_id, actor)
-		CodeBlocks.CodeBlockID.HADAMARD:
-			var code_block = CodeBlocks.CodeBlockHadamard.new()
-			return code_block.set_actor(actor_id, actor)
-		CodeBlocks.CodeBlockID.CONFIDENT_SCOUT:
-			var code_block = CodeBlocks.CodeBlockConfidentScout.new()
-			return code_block.set_actor(actor_id, actor)
-		CodeBlocks.CodeBlockID.TIMID_SCOUT:
-			var code_block = CodeBlocks.CodeBlockTimidScout.new()
-			return code_block.set_actor(actor_id, actor)
-		CodeBlocks.CodeBlockID.CONSULT_ORACLE:
-			var code_block = CodeBlocks.CodeBlockConsultOracle.new()
-			return code_block.set_actor(actor_id, actor)
-		null:
-			var code_block = CodeBlocks.CodeBlockNull.new()
-			return code_block.set_actor(actor_id, actor)
 
 func calculate_total_matrix(world_count : int) -> SparseMatrix:
 	var affected_worlds : Array = get_affected_worlds(world_count)

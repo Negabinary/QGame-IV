@@ -4,7 +4,6 @@
 [ext_resource path="res://Main/Editor/WorldViewer/WorldViewer.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Main/Editor/CodeArea/CodeArea.tscn" type="PackedScene" id=3]
 
-
 [sub_resource type="Shader" id=1]
 
 [sub_resource type="ShaderMaterial" id=2]
@@ -15,9 +14,7 @@ script/source = "extends Editor
 
 func _init().():
 	world_path = \"res://Main/Editor/Levels/WorldLevels/999-Test.tscn\"
-	actors = [
-    	{\"type\": WORLD_CHARACTERS.WorldCharacters.CAT, \"qubit\":0},
-		{\"type\": WORLD_CHARACTERS.WorldCharacters.CAT, \"qubit\":1}]
+	actors = [ActorCat.new(0, 0), ActorCat.new(1, 1)]
 	initial_state_vector = PoolVector2Array([
 		Vector2(1,0), Vector2(0,0), Vector2(0,0), Vector2(0,0)])
 	blocks = [CodeBlocks.CodeBlockID.SWORD, CodeBlocks.CodeBlockID.HADAMARD, CodeBlocks.CodeBlockID.TIMID_SCOUT, CodeBlocks.CodeBlockID.CONFIDENT_SCOUT, CodeBlocks.CodeBlockID.CONSULT_ORACLE]"

@@ -1,9 +1,9 @@
-const WORLD_CHARACTERS = preload("res://Actors/WorldCharacters.gd").WorldCharacters
+const WORLD_CHARACTERS = preload("res://old_actors/WorldCharacters.gd").WorldCharacters
 const CodeBlocks = preload("res://CodeBlocks/CodeBlocks.gd").CodeBlockID
 
 var world_path = "res://LevelData/H0/H0World.tscn"
 
-var actors = [
+var old_actors = [
     {"type": WORLD_CHARACTERS.KING, "qubit":0, "goal":0},
 	{"type": WORLD_CHARACTERS.ENEMY, "qubit":1, "goal":1}
 ]

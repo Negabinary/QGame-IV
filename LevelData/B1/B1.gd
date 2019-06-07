@@ -2,7 +2,7 @@ extends LevelData
 
 var world_path = "res://LevelData/B1/B1World.tscn"
 
-var actors = [
+var old_actors = [
     {"type": WORLD_CHARACTERS.KING, "qubit":0, "goal":0},
 	{"type": WORLD_CHARACTERS.KING, "qubit":1},
 	{"type": WORLD_CHARACTERS.KING, "qubit":2, "goal": 1}

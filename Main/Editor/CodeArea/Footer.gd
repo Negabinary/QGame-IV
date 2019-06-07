@@ -1,14 +1,16 @@
 extends HBoxContainer
 
-var actor
+var actor:Actor
 
-func update_text(actor_id, probabilities):
-	var current_probability = str(int(probabilities[actor_id]*100+0.5))
+func update_text(probabilities:Array) -> void:
+	var actor_id := actor.get_actor_id()
+	var current_probability = str(int(probabilities[actor.actor_id]*100+0.5))
 	$Current.text = current_probability + "%"
-	if actor.has("goal"):
-		var goal_probability = str(int(actor.goal*100+0.5))
-		$Target.text = goal_probability + "%"
-		var goal_satisfied = abs(probabilities[actor_id] - actor.goal) < 0.00001
+	if actor.has_goal():
+		var goal := actor.get_goal()
+		var goal_string := str(int(goal*100+0.5)) + "%"
+		var goal_satisfied = abs(probabilities[actor_id] - goal) < 0.00001
+		$Target.text = goal_string
 		if goal_satisfied:
 			$Status.text = "True"
 		else:

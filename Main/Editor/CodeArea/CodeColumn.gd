@@ -28,12 +28,12 @@ func _is_mouse_over():
 	return get_global_rect().has_point(get_global_mouse_position())
 
 
-func initialise(actors, column_no:int):
+func initialise(actors:Array, column_no:int) -> void:
 	set_column_no(column_no)
 	for actor_id in range(actors.size()):
 		var actor = actors[actor_id]
 		var drop_area = DROP_AREA_SCENE.instance()
-		drop_area.initialise(actor, actor_id)
+		drop_area.initialise(actor)
 		drop_area.connect("block_added", self, "on_block_added")
 		drop_area.connect("block_changed", self, "on_block_changed")
 		drop_area.connect("block_removed", self, "on_block_removed")

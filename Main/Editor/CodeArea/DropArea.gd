@@ -3,18 +3,15 @@ extends PanelContainer
 const CODE_BLOCK_TEXTURES = CodeBlocks.CODE_BLOCK_TEXTURES
 const CODE_BLOCK_MOUSE_POINTER = preload("CodeBlockMouseFollower.tscn")
 
-var actor
-var actor_id
-var code_block = CodeBlocks.new_code_block()
-
+var actor : Actor
+var code_block := CodeBlocks.new_code_block()
 
 
 func _ready():
 	connect("mouse_exited", self, "on_mouse_exited")
 
-func initialise(actor, actor_id):
+func initialise(actor:Actor) -> void:
 	self.actor = actor
-	self.actor_id = actor_id
 
 
 func remove_block() -> void:
@@ -30,7 +27,7 @@ func change_block(code_block):
 func add_block(code_block:CodeBlock) -> void:
 	$Sprite.texture = load(CODE_BLOCK_TEXTURES[code_block.code_block_id])
 	self.code_block = code_block
-	code_block.set_actor(actor_id, actor)
+	code_block.set_actor(actor)
 	_signal_block_added()
 
 func preview_block(code_block):
@@ -69,10 +66,10 @@ func _make_drag_preview(code_block):
 	return drag_preview
 
 func can_drop_data(position, data):
-	var can_drop_data = data.drag_type == "code_block" and (data.code_block.code_block_id in WORLD_CHARACTERS.ACCEPTS[actor.type])
+	var can_drop_data = data.drag_type == "code_block" and actor.can_place_code_block(data.code_block)
 	if can_drop_data:
 		var global_rect = get_global_rect()
-		data.code_block.set_actor(actor_id, actor)
+		data.code_block.set_actor(actor)
 		preview_block(data.code_block)
 	return can_drop_data
 
@@ -81,17 +78,22 @@ func on_mouse_exited():
 
 
 func _signal_block_added():
+	var actor_id = actor.get_actor_id()
 	emit_signal("block_added", actor_id, code_block)
 
 func _signal_block_changed():
+	var actor_id = actor.get_actor_id()
 	emit_signal("block_changed", actor_id, code_block)
 
 func _signal_block_removed():
+	var actor_id = actor.get_actor_id()
 	emit_signal("block_removed", actor_id)
 
 func _signal_block_preview(code_block):
+	var actor_id = actor.get_actor_id()
 	emit_signal("block_preview", actor_id, code_block)
 
 func _signal_block_preview_end():
+	var actor_id = actor.get_actor_id()
 	emit_signal("block_preview_end", actor_id)
 

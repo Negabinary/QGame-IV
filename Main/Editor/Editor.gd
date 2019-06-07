@@ -4,13 +4,13 @@ class_name Editor
 const CODE_BLOCKS := preload("CodeBlocks/CodeBlocks.gd").CodeBlockID
 
 var world_path := "res://LevelData/G0/G0World.tscn"
-var actors := [
-    {"type": WORLD_CHARACTERS.WorldCharacters.KING, "qubit":0, "goal":0, "guard":1},
-	{"type": WORLD_CHARACTERS.WorldCharacters.GUARD, "qubit":1, "goal": 0}]
 var initial_state_vector := PoolVector2Array([
 	Vector2(0,0), Vector2(1,0), Vector2(0,0), Vector2(0,0)])
 var blocks  := [CODE_BLOCKS.SWORD]
 
+var __actor_king := ActorGuardedKing.new(0, 0, 1, 0)
+var __actor_guard := ActorGuard.new(1, 1, 0)
+var actors := [__actor_king, __actor_guard]
 
 onready var head_column := $CodeArea/VBoxContainer/PanelContainer/HBoxContainer/HeaderColumn
 onready var code_columns :=$CodeArea/VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/CodeColumns
@@ -145,8 +145,8 @@ func _get_final_probabilities() -> Array:
 func _get_is_every_condition_met(probabilities:Array) -> bool:
 	var all_conditions_met := true
 	for actor_id in actors.size():
-		if actors[actor_id].has("goal"):
-			if abs(probabilities[actor_id] - actors[actor_id].goal) > 0.00001:
+		if actors[actor_id].has_goal():
+			if abs(probabilities[actor_id] - actors[actor_id].get_goal()) > 0.00001:
 				all_conditions_met = false
 				break
 	return all_conditions_met

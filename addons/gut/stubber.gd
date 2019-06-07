@@ -56,7 +56,7 @@ func _add_obj_method(obj, method, subpath=null):
 # Public
 # ##############
 
-# TODO: This method is only used in tests and should be refactored out.  It
+# TODO: This method is only used in tests and should be refold_actored out.  It
 # does not support inner classes and isn't helpful.
 func set_return(obj, method, value, parameters=null):
 	var key = _add_obj_method(obj, method)

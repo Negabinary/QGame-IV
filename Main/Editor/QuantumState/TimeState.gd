@@ -1,18 +1,18 @@
 class_name TimeState
 
-var actors
+var actors : Array
 var actions : Actions
 var state_vector : StateVector
 var qubit_count : int
 var time : int
 
 
-func _init(actors:Array, state_vector:PoolVector2Array, code_array:=[], time:=0):
+func _init(actors:Array, state_vector:PoolVector2Array, code_array:=[], time:=0) -> void:
 	if code_array == []:
 		for actor in actors:
 			code_array += [CodeBlocks.new_code_block()]
 	self.actors = actors
-	self.actions = Actions.new(code_array, actors, state_vector.size())
+	self.actions = Actions.new(code_array, state_vector.size())
 	self.state_vector = StateVector.new(state_vector)
 	self.state_vector =  self.actions.apply_actions(self.state_vector)
 	self.qubit_count = round(log(state_vector.size())/log(2))
@@ -52,7 +52,7 @@ func get_qubit_code_block_array() -> Array:
 	for qubit_id in range(qubit_count):
 		qubit_code_array += [null]
 	for actor_id in range(actor_code_array.size()):
-		qubit_code_array[actors[actor_id].qubit] = actor_code_array[actor_id]
+		qubit_code_array[actors[actor_id].get_qubit_id()] = actor_code_array[actor_id]
 	return qubit_code_array
 
 func get_qubit_count():
@@ -62,7 +62,7 @@ func get_world_probabilities():
 	return state_vector.get_world_probabilities()
 
 func get_actor_probability(actor_id):
-	var qubit_id = actors[actor_id].qubit
+	var qubit_id = actors[actor_id].get_qubit_id()
 	return state_vector.get_qubit_probability(qubit_id)
 
 func get_forward_matrix() -> SparseMatrix:

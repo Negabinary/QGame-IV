@@ -41,16 +41,8 @@ class CodeBlockSword:
 	
 	var code_block_id = 0
 	
-	func get_paired_world(world_id, affected_worlds):
-		var posbit = 1 << actor.get_qubit_id()
-		var filtered_worlds = get_guard_affected_worlds(affected_worlds)
-		if world_id in filtered_worlds:
-			return world_id ^ posbit
-		else:
-			return world_id
-	
-	func get_matrix(world_count:int, affected_worlds:Array) -> SparseMatrix:
-		var qubit_id = actor.get_qubit_id()
+	func old_get_matrix(world_count:int, affected_worlds:Array) -> SparseMatrix:
+		var qubit_id = actor.old_get_qubit_id()
 		var filtered_worlds = get_guard_affected_worlds(affected_worlds)
 		return GateBuilder.new_not(world_count, qubit_id, filtered_worlds)
 	
@@ -72,8 +64,8 @@ class CodeBlockHadamard:
 	
 	var code_block_id = 1
 	
-	func get_matrix(world_count:int, affected_worlds:Array) -> SparseMatrix:
-		var qubit_id = actor.get_qubit_id()
+	func old_get_matrix(world_count:int, affected_worlds:Array) -> SparseMatrix:
+		var qubit_id = actor.old_get_qubit_id()
 		return GateBuilder.new_hadamard(world_count, qubit_id, affected_worlds)
 
 
@@ -87,9 +79,9 @@ class CodeBlockTimidScout:
 	
 	var code_block_id = 2
 	
-	func filter_affected_worlds(affected_worlds):
+	func old_filter_affected_worlds(affected_worlds):
 		var filtered_worlds = []
-		var qubit_id = actor.get_qubit_id()
+		var qubit_id = actor.old_get_qubit_id()
 		var posbit = 1 << qubit_id
 		for world_id in affected_worlds:
 			if world_id | posbit != world_id:
@@ -102,9 +94,9 @@ class CodeBlockConfidentScout:
 	
 	var code_block_id = 3
 	
-	func filter_affected_worlds(affected_worlds):
+	func old_filter_affected_worlds(affected_worlds):
 		var filtered_worlds = []
-		var qubit_id = actor.get_qubit_id()
+		var qubit_id = actor.old_get_qubit_id()
 		var posbit = 1 << qubit_id
 		for world_id in affected_worlds:
 			if world_id | posbit == world_id:
@@ -117,7 +109,7 @@ class CodeBlockConsultOracle:
 	
 	var code_block_id = 4
 	"""
-	func filter_affected_worlds(affected_worlds):
+	func old_filter_affected_worlds(affected_worlds):
 		var oracle_conditions = old_actor.conditions
 		for qubit_id in oracle_conditions:
 			var filtered_worlds = []

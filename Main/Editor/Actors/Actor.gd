@@ -1,20 +1,12 @@
 extends Object
 class_name Actor
 
-var goal := -1
-var qubit_id : int
 var actor_id : int
-var compatible_code_blocks := [
-		CodeBlocks.CodeBlockSword, 
-		CodeBlocks.CodeBlockHadamard, 
-		CodeBlocks.CodeBlockConfidentScout, 
-		CodeBlocks.CodeBlockTimidScout]
+var compatible_code_blocks := []
 var icon : PackedScene = load("/Headers/CatIcon.tscn")
 
-func _init(actor_id, qubit_id, goal=-1):
+func _init(actor_id, goal=-1):
 	self.actor_id = actor_id
-	self.qubit_id = qubit_id
-	self.goal = goal
 
 func can_place_code_block(code_block:CodeBlock) -> bool:
 	for compatible_code_block in compatible_code_blocks:
@@ -22,17 +14,17 @@ func can_place_code_block(code_block:CodeBlock) -> bool:
 			return true
 	return false
 
+func filter_affected_worlds(affected_worlds:Array, code_block:CodeBlock) -> Array:
+	return affected_worlds
+
+func get_matrix(code_block:CodeBlock, affected_worlds:Array, world_count:int) -> SparseMatrix:
+	return GateBuilder.new_identity(world_count)
+
 func get_actor_id() -> int:
 	return actor_id
 
-func get_qubit_id() -> int:
-	return qubit_id
-
 func has_goal() -> bool:
-	return goal != -1
-
-func get_goal() -> int:
-	return goal
+	return false
 
 func get_icon() -> PackedScene:
 	return icon

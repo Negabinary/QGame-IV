@@ -1,11 +1,13 @@
 class_name Actions
 
+var actors : Array
 var total_matrix : SparseMatrix
 var total_matrix_inverse : SparseMatrix
 var code_block_array := []
 
 
-func _init(code_block_array, world_count):
+func _init(code_block_array, world_count, actors):
+	self.actors = actors
 	self.code_block_array = code_block_array
 	self.total_matrix = calculate_total_matrix(world_count)
 	self.total_matrix_inverse = self.total_matrix
@@ -14,10 +16,12 @@ func _init(code_block_array, world_count):
 func calculate_total_matrix(world_count : int) -> SparseMatrix:
 	var affected_worlds : Array = get_affected_worlds(world_count)
 	var total_matrix : SparseMatrix = GateBuilder.new_identity(world_count)
-	for code_block in code_block_array:
-		if code_block is CodeBlocks.CodeBlockAction:
-			total_matrix = total_matrix.multiply(code_block.get_matrix(world_count, affected_worlds))
-			
+	for actor_id in code_block_array.size():
+		var actor:Actor = actors[actor_id]
+		var code_block = code_block_array[actor_id]
+		var block_matrix = actor.get_matrix(code_block, affected_worlds, world_count)
+		if not block_matrix is GateBuilder.IdentityMatrix:
+			total_matrix = total_matrix.multiply(block_matrix)
 	return total_matrix
 
 
@@ -25,8 +29,10 @@ func get_affected_worlds(world_count):
 	var affected_worlds = []
 	for world_id in range(0, world_count):
 		affected_worlds += [world_id]
-	for code_block in code_block_array:
-		affected_worlds = code_block.filter_affected_worlds(affected_worlds)
+	for actor_id in code_block_array.size():
+		var actor:Actor = actors[actor_id]
+		var code_block = code_block_array[actor_id]
+		affected_worlds = actor.filter_affected_worlds(affected_worlds, code_block)
 	return affected_worlds
 
 func get_affected_worlds_preview(world_count, preview_code_block):

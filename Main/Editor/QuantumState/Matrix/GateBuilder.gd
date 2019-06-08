@@ -25,8 +25,15 @@ static func new_not(world_count:int, affected_qubit:int, affected_worlds:Array):
 			matrix.add_value(world_id, world_id, 1)
 	return matrix
 
+
 static func new_identity(world_count:int):
-	var matrix = SparseMatrix.new(world_count, world_count)
+	var matrix = IdentityMatrix.new(world_count, world_count)
 	for i in range(world_count):
 		matrix.add_value(i, i, 1)
 	return matrix
+
+class IdentityMatrix:
+	extends SparseMatrix
+	
+	func _init(x:int, y:int).(x, y):
+		pass

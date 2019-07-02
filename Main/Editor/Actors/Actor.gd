@@ -3,7 +3,7 @@ class_name Actor
 
 var actor_id : int
 var compatible_code_blocks := []
-var icon : PackedScene = load("/Headers/CatIcon.tscn")
+var icon : PackedScene = load("res://Main/Editor/Actors/Headers/CatIcon.tscn")
 
 func _init(actor_id, goal=-1):
 	self.actor_id = actor_id

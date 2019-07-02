@@ -20,12 +20,12 @@ func remove_block() -> void:
 	_signal_block_removed()
 
 func change_block(code_block):
-	$Sprite.texture = load(CODE_BLOCK_TEXTURES[code_block.code_block_id])
+	$Sprite.texture = code_block.texture
 	self.code_block = code_block
 	_signal_block_changed()
 
 func add_block(code_block:CodeBlock) -> void:
-	$Sprite.texture = load(CODE_BLOCK_TEXTURES[code_block.code_block_id])
+	$Sprite.texture = code_block.texture
 	self.code_block = code_block
 	code_block.set_actor(actor)
 	_signal_block_added()

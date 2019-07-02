@@ -1,11 +1,13 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Theme/main_theme.tres" type="Theme" id=1]
 [ext_resource path="res://Main/LevelSelect/LevelSelect.gd" type="Script" id=2]
 [ext_resource path="res://Main/LevelSelect/LevelSelectButton.gd" type="Script" id=3]
 [ext_resource path="res://Main/Editor/Levels/EditorLevels/000-Tutorial.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Main/Editor/Levels/EditorLevels/999-Test.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Main/Editor/Editor.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Main/Editor/Levels/EditorLevels/005-Guard.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Main/Editor/Levels/EditorLevels/010-Superposition.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Main/Editor/Levels/EditorLevels/999-Test.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Main/Editor/Editor.tscn" type="PackedScene" id=8]
 
 [node name="LevelSelect" type="ColorRect"]
 anchor_right = 1.0
@@ -28,49 +30,65 @@ margin_bottom = 124.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="G0" type="Button" parent="VBoxContainer"]
+[node name="Tutorial" type="Button" parent="VBoxContainer"]
 margin_right = 100.0
 margin_bottom = 24.0
 text = "Tutorial"
 script = ExtResource( 3 )
 level_scene = ExtResource( 4 )
 
-[node name="G1" type="Button" parent="VBoxContainer"]
+[node name="Guard" type="Button" parent="VBoxContainer"]
 margin_top = 28.0
 margin_right = 100.0
 margin_bottom = 52.0
-text = "Test"
+text = "Guard"
 script = ExtResource( 3 )
 level_scene = ExtResource( 5 )
 
-[node name="S0" type="Button" parent="VBoxContainer"]
+[node name="Superposition" type="Button" parent="VBoxContainer"]
 margin_top = 56.0
 margin_right = 100.0
 margin_bottom = 80.0
-text = "Default"
+text = "Superposition"
 script = ExtResource( 3 )
 level_scene = ExtResource( 6 )
 
-[node name="S1" type="Button" parent="VBoxContainer"]
+[node name="G1" type="Button" parent="VBoxContainer"]
 margin_top = 84.0
 margin_right = 100.0
 margin_bottom = 108.0
+text = "Test"
+script = ExtResource( 3 )
+level_scene = ExtResource( 7 )
+
+[node name="S0" type="Button" parent="VBoxContainer"]
+margin_top = 112.0
+margin_right = 100.0
+margin_bottom = 136.0
+text = "Default"
+script = ExtResource( 3 )
+level_scene = ExtResource( 8 )
+
+[node name="S1" type="Button" parent="VBoxContainer"]
+margin_top = 140.0
+margin_right = 100.0
+margin_bottom = 164.0
 disabled = true
 text = "Scout 1"
 script = ExtResource( 3 )
 
 [node name="H0" type="Button" parent="VBoxContainer"]
-margin_top = 112.0
+margin_top = 168.0
 margin_right = 100.0
-margin_bottom = 136.0
+margin_bottom = 192.0
 disabled = true
 text = "Hadamard 0"
 script = ExtResource( 3 )
 
 [node name="H1" type="Button" parent="VBoxContainer"]
-margin_top = 140.0
+margin_top = 196.0
 margin_right = 100.0
-margin_bottom = 164.0
+margin_bottom = 220.0
 disabled = true
 text = "Hadamard 1"
 script = ExtResource( 3 )

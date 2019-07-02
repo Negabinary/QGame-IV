@@ -16,7 +16,6 @@ func get_matrix(code_block:CodeBlock, affected_worlds:Array, world_count:int) ->
 
 
 func _get_matrix_sword(affected_worlds:Array, world_count:int) -> SparseMatrix:
-	print("===")
 	var filtered_worlds = _filter_affected_by_guard(affected_worlds)
 	return GateBuilder.new_not(world_count, qubit_id_neck, filtered_worlds)
 

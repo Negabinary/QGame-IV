@@ -38,35 +38,14 @@ class CodeBlockAction:
 
 class CodeBlockSword:
 	extends CodeBlockAction
-	
 	var code_block_id = 0
-	
-	func old_get_matrix(world_count:int, affected_worlds:Array) -> SparseMatrix:
-		var qubit_id = actor.old_get_qubit_id()
-		var filtered_worlds = get_guard_affected_worlds(affected_worlds)
-		return GateBuilder.new_not(world_count, qubit_id, filtered_worlds)
-	
-	func get_guard_affected_worlds(affected_worlds):
-		if actor.has_method("old_get_guard_id"):
-			var filtered_worlds = []
-			var guard_qubit = actor.old_get_guard_id()
-			var guard_posbit = 1 << guard_qubit
-			for world_id in affected_worlds:
-				if world_id | guard_posbit == world_id:
-					filtered_worlds += [world_id]
-			return filtered_worlds
-		else:
-			return affected_worlds
+	const texture = preload("Code_Block_Sword.tres")
 
 
 class CodeBlockHadamard:
 	extends CodeBlockAction
-	
 	var code_block_id = 1
-	
-	func old_get_matrix(world_count:int, affected_worlds:Array) -> SparseMatrix:
-		var qubit_id = actor.old_get_qubit_id()
-		return GateBuilder.new_hadamard(world_count, qubit_id, affected_worlds)
+	const texture = preload("Code_Block_Hadamard.tres")
 
 
 class CodeBlockCondition:
@@ -76,38 +55,21 @@ class CodeBlockCondition:
 
 class CodeBlockTimidScout:
 	extends CodeBlockCondition
-	
 	var code_block_id = 2
-	
-	func old_filter_affected_worlds(affected_worlds):
-		var filtered_worlds = []
-		var qubit_id = actor.old_get_qubit_id()
-		var posbit = 1 << qubit_id
-		for world_id in affected_worlds:
-			if world_id | posbit != world_id:
-				filtered_worlds += [world_id]
-		return filtered_worlds
+	const texture = preload("Code_Block_Timid_Scout.tres")
 
 
 class CodeBlockConfidentScout:
 	extends CodeBlockCondition
-	
 	var code_block_id = 3
-	
-	func old_filter_affected_worlds(affected_worlds):
-		var filtered_worlds = []
-		var qubit_id = actor.old_get_qubit_id()
-		var posbit = 1 << qubit_id
-		for world_id in affected_worlds:
-			if world_id | posbit == world_id:
-				filtered_worlds += [world_id]
-		return filtered_worlds
+	const texture = preload("Code_Block_Confident_Scout.tres")
 
 
 class CodeBlockConsultOracle:
 	extends CodeBlockCondition
-	
 	var code_block_id = 4
+	const texture = preload("Code_Block_Consult_Oracle.tres")
+
 	"""
 	func old_filter_affected_worlds(affected_worlds):
 		var oracle_conditions = old_actor.conditions

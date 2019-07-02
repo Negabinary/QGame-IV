@@ -24,7 +24,6 @@ func on_level_select(level_path):
 	remove_child($LevelSelect)
 
 func on_return_to_level_select():
-	print("BOO")
 	_create_level_select_instancce()
 	remove_child(get_child(0))
 	

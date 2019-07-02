@@ -3,7 +3,7 @@ class_name Editor
 
 const CODE_BLOCKS := preload("CodeBlocks/CodeBlocks.gd").CodeBlockID
 
-var world_path := "res://LevelData/G0/G0World.tscn"
+var world_path := "res://Main/Editor/Levels/WorldLevels/005-Guard.tscn"
 var initial_state_vector := PoolVector2Array([
 	Vector2(0,0), Vector2(1,0), Vector2(0,0), Vector2(0,0)])
 var blocks  := [CODE_BLOCKS.SWORD]
@@ -193,9 +193,7 @@ func on_code_column_removed(column_id:int) -> void:
 		_ui_change_time(current_time-1)
 
 func on_return_to_level_select() -> void:
-	print("be")
 	emit_signal("return_to_level_select")
 
 func on_level_complete() -> void:
-	print("bu")
 	emit_signal("return_to_level_select")

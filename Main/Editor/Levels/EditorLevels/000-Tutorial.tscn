@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Theme/main_theme.tres" type="Theme" id=1]
 [ext_resource path="res://Main/Editor/WorldViewer/TutorialWorldViewer.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Main/Editor/CodeArea/CodeArea.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Main/Editor/TutoralText.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Main/Editor/CodeArea/CodeArea.tscn" type="PackedScene" id=4]
 
 [sub_resource type="Shader" id=1]
 
@@ -93,14 +94,11 @@ custom_constants/separation = 0
 script = SubResource( 3 )
 
 [node name="WorldViewer" parent="Main" instance=ExtResource( 2 )]
-margin_bottom = 522.0
+margin_bottom = 517.0
 
-[node name="TutoralText" type="Label" parent="Main"]
-margin_top = 522.0
-margin_right = 1024.0
+[node name="TutoralText" parent="Main" instance=ExtResource( 3 )]
+margin_top = 517.0
 margin_bottom = 572.0
-rect_min_size = Vector2( 0, 50 )
-text = "Tutorial Text Goes here"
-align = 1
+rect_min_size = Vector2( 0, 55 )
 
-[node name="CodeArea" parent="Main" instance=ExtResource( 3 )]
+[node name="CodeArea" parent="Main" instance=ExtResource( 4 )]

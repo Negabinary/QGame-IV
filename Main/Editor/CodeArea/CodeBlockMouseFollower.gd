@@ -1,7 +1,5 @@
 extends Control
 
-var CODE_BLOCK_TEXTURES := CodeBlocks.CODE_BLOCK_TEXTURES
-
 func set_drag(new_id:int):
 	visible = true
 	get_children()[new_id].visible = true

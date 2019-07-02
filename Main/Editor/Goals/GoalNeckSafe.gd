@@ -1,0 +1,2 @@
+extends GoalNeck
+class_name GoalNeckSafe

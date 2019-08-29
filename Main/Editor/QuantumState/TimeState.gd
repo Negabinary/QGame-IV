@@ -72,6 +72,9 @@ func get_forward_matrix() -> SparseMatrix:
 func get_backward_matrix() -> SparseMatrix:
 	return actions.get_backward_matrix()
 
+func get_actor_sprites(actor:Actor, world_id:int, active:bool) -> Array: #of strings
+	return actor.get_actor_sprites(world_id, active, get_code_block_array())
+
 func set_time(new_time:int) -> void:
 	time = new_time
 

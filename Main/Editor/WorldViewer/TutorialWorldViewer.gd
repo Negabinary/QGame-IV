@@ -1,9 +1,11 @@
 extends Control
 
 var CODE_BLOCKS := CodeBlocks.CodeBlockID
+var actors:Array
 
-func initialise_world_viewer(time_state:TimeState, world_path):
+func initialise_world_viewer(time_state:TimeState, world_path:String, actors:Array) -> void:
 	set_picture(time_state)
+	self.actors = actors
 
 func apply_matrix(new_time_state:TimeState, change_matrix:SparseMatrix) -> void:
 	set_picture(new_time_state)

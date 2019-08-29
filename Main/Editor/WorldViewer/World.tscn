@@ -3,9 +3,6 @@
 [ext_resource path="res://Main/Editor/WorldViewer/WorldScript.gd" type="Script" id=1]
 [ext_resource path="res://Main/Editor/WorldViewer/WorldCamera.gd" type="Script" id=2]
 
-
-
-
 [sub_resource type="StreamTexture" id=1]
 flags = 4
 load_path = "res://.import/back.png-3d29a357216edcfe2e88d47d59df1b43.stex"
@@ -98,4 +95,3 @@ texture = SubResource( 4 )
 [node name="OffSword" type="Sprite" parent="Characters/King5"]
 visible = false
 texture = SubResource( 5 )
-

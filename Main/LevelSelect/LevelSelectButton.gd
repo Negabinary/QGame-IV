@@ -12,4 +12,3 @@ signal level_selected
 
 func _on_G0_button_up():
 	emit_signal("level_selected", level_scene)
-	

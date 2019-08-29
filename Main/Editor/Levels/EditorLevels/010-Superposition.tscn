@@ -39,6 +39,6 @@ margin_bottom = 542.0
 [node name="TutoralText" parent="Main" instance=ExtResource( 3 )]
 margin_top = 542.0
 margin_bottom = 572.0
-text = "The guard is in a superposition of safe and not safe. "
+text = "The guard is in a superposition of safe and not safe. We might not be able to keep this guard safe."
 
 [node name="CodeArea" parent="Main" instance=ExtResource( 4 )]

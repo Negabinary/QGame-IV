@@ -12,9 +12,12 @@ func update_text(probabilities:Array) -> void:
 		var goal_satisfied = abs(probabilities[actor_id] - goal) < 0.00001
 		$Target.text = goal_string
 		if goal_satisfied:
-			$Status.text = "True"
+			$Status/Tick.show()
+			$Status/Cross.hide()
 		else:
-			$Status.text = "False"
+			$Status/Tick.hide()
+			$Status/Cross.show()
 	else:
 		$Target.text = "No Goal"
-		$Status.text = "True"
+		$Status/Tick.show()
+		$Status/Cross.hide()

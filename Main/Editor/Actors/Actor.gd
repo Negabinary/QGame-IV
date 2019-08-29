@@ -20,6 +20,9 @@ func filter_affected_worlds(affected_worlds:Array, code_block:CodeBlock) -> Arra
 func get_matrix(code_block:CodeBlock, affected_worlds:Array, world_count:int) -> SparseMatrix:
 	return GateBuilder.new_identity(world_count)
 
+func get_actor_sprites(world_id:int, active:bool, code_block_array:Array) -> Array: #of strings
+	return []
+
 func get_actor_id() -> int:
 	return actor_id
 

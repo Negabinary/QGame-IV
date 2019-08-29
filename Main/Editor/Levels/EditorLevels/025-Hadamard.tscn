@@ -1,0 +1,45 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Theme/main_theme.tres" type="Theme" id=1]
+[ext_resource path="res://Main/Editor/WorldViewer/WorldViewer.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Main/Editor/TutoralText.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Main/Editor/CodeArea/CodeArea.tscn" type="PackedScene" id=4]
+
+[sub_resource type="Shader" id=1]
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+
+[sub_resource type="GDScript" id=3]
+script/source = "extends Editor
+
+func _init().():
+	world_path = \"res://Main/Editor/Levels/WorldLevels/025-Hadamard.tscn\"
+	initial_state_vector = PoolVector2Array([
+			Vector2(0.5,0), Vector2(0.5,0), Vector2(0.5,0), Vector2(0.5,0)])
+	blocks  = [CODE_BLOCKS.SWORD, CODE_BLOCKS.HADAMARD]
+	actors = [ActorKing.new(0, 0, 0), ActorEnemy.new(1, 1, 1)]"
+
+[node name="Editor" type="ColorRect"]
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+color = Color( 0.0470588, 0.0784314, 0.0627451, 1 )
+
+[node name="Main" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 0
+script = SubResource( 3 )
+
+[node name="WorldViewer" parent="Main" instance=ExtResource( 2 )]
+margin_bottom = 542.0
+
+[node name="TutoralText" parent="Main" instance=ExtResource( 3 )]
+margin_top = 542.0
+margin_bottom = 572.0
+text = "You can use the Hadamard spell (H) to create or cancel basic superpositions."
+autowrap = true
+
+[node name="CodeArea" parent="Main" instance=ExtResource( 4 )]

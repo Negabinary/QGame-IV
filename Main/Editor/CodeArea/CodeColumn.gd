@@ -30,19 +30,21 @@ func _is_mouse_over():
 
 func initialise(actors:Array, column_no:int) -> void:
 	set_column_no(column_no)
-	for actor_id in range(actors.size()):
-		var actor = actors[actor_id]
-		var drop_area = DROP_AREA_SCENE.instance()
-		drop_area.initialise(actor)
-		drop_area.connect("block_added", self, "on_block_added")
-		drop_area.connect("block_changed", self, "on_block_changed")
-		drop_area.connect("block_removed", self, "on_block_removed")
-		drop_area.connect("block_preview", self, "on_block_preview")
-		drop_area.connect("block_preview_end", self, "on_block_preview_end")
-		$VBoxContainer/VBoxContainer.add_child(drop_area)
+	for actor in actors:
+		add_drop_area(actor)
 	$VBoxContainer/HBoxContainer/SelectButton.connect("toggled", self, "on_select_button_toggled")
 	$VBoxContainer/HBoxContainer/RemoveButton.connect("button_up", self, "on_column_to_be_removed")
 
+
+func add_drop_area(actor:Actor) -> void:
+	var drop_area = DROP_AREA_SCENE.instance()
+	drop_area.initialise(actor)
+	drop_area.connect("block_added", self, "on_block_added")
+	drop_area.connect("block_changed", self, "on_block_changed")
+	drop_area.connect("block_removed", self, "on_block_removed")
+	drop_area.connect("block_preview", self, "on_block_preview")
+	drop_area.connect("block_preview_end", self, "on_block_preview_end")
+	$VBoxContainer/VBoxContainer.add_child(drop_area)
 
 
 func get_code_array():

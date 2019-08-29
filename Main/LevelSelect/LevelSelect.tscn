@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Theme/main_theme.tres" type="Theme" id=1]
 [ext_resource path="res://Main/LevelSelect/LevelSelect.gd" type="Script" id=2]
@@ -6,8 +6,16 @@
 [ext_resource path="res://Main/Editor/Levels/EditorLevels/000-Tutorial.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Main/Editor/Levels/EditorLevels/005-Guard.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Main/Editor/Levels/EditorLevels/010-Superposition.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Main/Editor/Levels/EditorLevels/999-Test.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Main/Editor/Editor.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Main/Editor/Levels/EditorLevels/015-Scout.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Main/Editor/Levels/EditorLevels/020-Russian_Roulette.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Main/Editor/Levels/EditorLevels/025-Hadamard.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Main/Editor/Levels/EditorLevels/030-Negative.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Main/Editor/Levels/EditorLevels/035-Disentangle.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Main/Editor/Levels/EditorLevels/040-Mess.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Main/Editor/Levels/EditorLevels/045-Oracle.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Main/Editor/Levels/EditorLevels/050-Dishonest.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Main/Editor/Levels/EditorLevels/999-Test.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Main/Editor/Editor.tscn" type="PackedScene" id=16]
 
 [node name="LevelSelect" type="ColorRect"]
 anchor_right = 1.0
@@ -53,42 +61,111 @@ text = "Superposition"
 script = ExtResource( 3 )
 level_scene = ExtResource( 6 )
 
-[node name="G1" type="Button" parent="VBoxContainer"]
+[node name="Scout" type="Button" parent="VBoxContainer"]
 margin_top = 84.0
 margin_right = 100.0
 margin_bottom = 108.0
-text = "Test"
+text = "Scout"
 script = ExtResource( 3 )
 level_scene = ExtResource( 7 )
 
-[node name="S0" type="Button" parent="VBoxContainer"]
+[node name="Roulette" type="Button" parent="VBoxContainer"]
 margin_top = 112.0
 margin_right = 100.0
 margin_bottom = 136.0
-text = "Default"
+text = "Roulette"
 script = ExtResource( 3 )
 level_scene = ExtResource( 8 )
 
-[node name="S1" type="Button" parent="VBoxContainer"]
+[node name="Hadamard" type="Button" parent="VBoxContainer"]
 margin_top = 140.0
 margin_right = 100.0
 margin_bottom = 164.0
+text = "Hadamard"
+script = ExtResource( 3 )
+level_scene = ExtResource( 9 )
+
+[node name="Negative" type="Button" parent="VBoxContainer"]
+margin_top = 168.0
+margin_right = 100.0
+margin_bottom = 192.0
+text = "Negative"
+script = ExtResource( 3 )
+level_scene = ExtResource( 10 )
+
+[node name="Disentangle" type="Button" parent="VBoxContainer"]
+margin_top = 196.0
+margin_right = 100.0
+margin_bottom = 220.0
+text = "Disentangle"
+script = ExtResource( 3 )
+level_scene = ExtResource( 11 )
+
+[node name="Mess" type="Button" parent="VBoxContainer"]
+margin_top = 224.0
+margin_right = 100.0
+margin_bottom = 248.0
+text = "Mess"
+script = ExtResource( 3 )
+level_scene = ExtResource( 12 )
+
+[node name="Oracle" type="Button" parent="VBoxContainer"]
+margin_top = 252.0
+margin_right = 100.0
+margin_bottom = 276.0
+text = "Oracle"
+script = ExtResource( 3 )
+level_scene = ExtResource( 13 )
+
+[node name="Dishonest" type="Button" parent="VBoxContainer"]
+margin_top = 280.0
+margin_right = 100.0
+margin_bottom = 304.0
+text = "Dishonest"
+script = ExtResource( 3 )
+level_scene = ExtResource( 14 )
+
+[node name="G1" type="Button" parent="VBoxContainer"]
+visible = false
+margin_top = 252.0
+margin_right = 100.0
+margin_bottom = 276.0
+text = "Test"
+script = ExtResource( 3 )
+level_scene = ExtResource( 15 )
+
+[node name="S0" type="Button" parent="VBoxContainer"]
+visible = false
+margin_top = 280.0
+margin_right = 100.0
+margin_bottom = 304.0
+text = "Default"
+script = ExtResource( 3 )
+level_scene = ExtResource( 16 )
+
+[node name="S1" type="Button" parent="VBoxContainer"]
+visible = false
+margin_top = 308.0
+margin_right = 100.0
+margin_bottom = 332.0
 disabled = true
 text = "Scout 1"
 script = ExtResource( 3 )
 
 [node name="H0" type="Button" parent="VBoxContainer"]
-margin_top = 168.0
+visible = false
+margin_top = 336.0
 margin_right = 100.0
-margin_bottom = 192.0
+margin_bottom = 360.0
 disabled = true
 text = "Hadamard 0"
 script = ExtResource( 3 )
 
 [node name="H1" type="Button" parent="VBoxContainer"]
-margin_top = 196.0
+visible = false
+margin_top = 364.0
 margin_right = 100.0
-margin_bottom = 220.0
+margin_bottom = 388.0
 disabled = true
 text = "Hadamard 1"
 script = ExtResource( 3 )

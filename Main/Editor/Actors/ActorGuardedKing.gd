@@ -1,10 +1,9 @@
-extends ActorKillable
+extends ActorKing
 class_name ActorGuardedKing
 
 var qubit_id_guard : int
 
 func _init(actor_id:int, qubit_id_neck:int, qubit_id_guard:int, goal:=-1).(actor_id, qubit_id_neck, goal):
-	self.icon = load("res://Main/Editor/Actors/Headers/KingIcon.tscn")
 	self.qubit_id_guard = qubit_id_guard
 
 

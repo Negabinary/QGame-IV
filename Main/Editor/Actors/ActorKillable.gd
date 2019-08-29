@@ -62,6 +62,13 @@ func get_neck_probability(state_vector:StateVector) -> float:
 	return state_vector.get_qubit_probability(qubit_id_neck)
 
 
+func get_actor_sprites(world_id:int, active:bool, code_block_array:Array) -> Array: #of Strings
+	if world_id | (1 << qubit_id_neck) == world_id:
+		return ["On"]
+	else:
+		return ["Off"]
+
+
 func has_goal() -> bool:
 	return goal != -1
 

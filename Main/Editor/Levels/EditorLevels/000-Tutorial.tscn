@@ -18,7 +18,7 @@ var parallel_world_viewer:PackedScene = load(\"res://Main/Editor/WorldViewer/Wor
 
 func _init().():
 	world_path = \"res://Main/Editor/Levels/WorldLevels/000-Tutorial.tscn\"
-	actors = [ActorKing.new(0, 0, 0)]
+	actors = [ActorIntroKing.new(0, 0, 0)]
 	initial_state_vector = PoolVector2Array([
 		Vector2(1,0), Vector2(0,0)])
 	blocks  = [CodeBlocks.CodeBlockID.SWORD]
@@ -52,7 +52,7 @@ func _update_level_progress() -> void:
 				remove_child($WorldViewer)
 				add_child(new_world_viewer_instance)
 				move_child(new_world_viewer_instance, 0)
-				new_world_viewer_instance.get_child(0).initialise_world_viewer(get_state_at_time(current_time-1), world_path)
+				new_world_viewer_instance.get_child(0).initialise_world_viewer(get_state_at_time(current_time-1), world_path, actors)
 				world_viewer = new_world_viewer_instance.get_child(0)
 		5:
 			if code_columns.get_state_count() == 6:

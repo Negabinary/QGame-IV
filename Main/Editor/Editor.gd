@@ -31,7 +31,7 @@ var current_time = 0
 func initialise() -> void:
 	initial_state = TimeState.new(actors, initial_state_vector)
 	_initialise_code_area(initial_state)
-	world_viewer.initialise_world_viewer(initial_state, world_path)
+	world_viewer.initialise_world_viewer(initial_state, world_path, actors)
 
 func _initialise_code_area(initial_state:TimeState) -> void:
 	head_column.initialise_code_headers(actors)

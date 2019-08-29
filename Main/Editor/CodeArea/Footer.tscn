@@ -1,6 +1,17 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Main/Editor/CodeArea/Footer.gd" type="Script" id=1]
+[ext_resource path="res://Graphics/Icon_atlas_old_with_tick_and_cross.png" type="Texture" id=2]
+
+[sub_resource type="AtlasTexture" id=1]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 400, 0, 50, 50 )
+
+[sub_resource type="AtlasTexture" id=2]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 450, 0, 50, 50 )
 
 [node name="Label" type="HBoxContainer"]
 margin_right = 50.0
@@ -23,10 +34,18 @@ rect_min_size = Vector2( 50, 50 )
 align = 1
 valign = 1
 
-[node name="Status" type="Label" parent="."]
+[node name="Status" type="Control" parent="."]
 margin_left = 108.0
 margin_right = 158.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 50, 50 )
-align = 1
-valign = 1
+
+[node name="Tick" type="TextureRect" parent="Status"]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = SubResource( 1 )
+
+[node name="Cross" type="TextureRect" parent="Status"]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = SubResource( 2 )

@@ -20,19 +20,44 @@ _global_script_classes=[ {
 "path": "res://Main/Editor/Actors/Actor.gd"
 }, {
 "base": "ActorKillable",
+"class": "ActorBaron",
+"language": "GDScript",
+"path": "res://Main/Editor/Actors/ActorBaron.gd"
+}, {
+"base": "ActorKillable",
 "class": "ActorCat",
 "language": "GDScript",
 "path": "res://Main/Editor/Actors/ActorCat.gd"
+}, {
+"base": "ActorOracle",
+"class": "ActorDishonestOracle",
+"language": "GDScript",
+"path": "res://Main/Editor/Actors/ActorDishonestOracle.gd"
+}, {
+"base": "ActorKillable",
+"class": "ActorEnemy",
+"language": "GDScript",
+"path": "res://Main/Editor/Actors/ActorEnemy.gd"
 }, {
 "base": "ActorKillable",
 "class": "ActorGuard",
 "language": "GDScript",
 "path": "res://Main/Editor/Actors/ActorGuard.gd"
 }, {
-"base": "ActorKillable",
+"base": "ActorKing",
 "class": "ActorGuardedKing",
 "language": "GDScript",
 "path": "res://Main/Editor/Actors/ActorGuardedKing.gd"
+}, {
+"base": "ActorOracle",
+"class": "ActorHonestOracle",
+"language": "GDScript",
+"path": "res://Main/Editor/Actors/ActorHonestOracle.gd"
+}, {
+"base": "ActorKing",
+"class": "ActorIntroKing",
+"language": "GDScript",
+"path": "res://Main/Editor/Actors/ActorIntoKing.gd"
 }, {
 "base": "Actor",
 "class": "ActorKillable",
@@ -43,6 +68,11 @@ _global_script_classes=[ {
 "class": "ActorKing",
 "language": "GDScript",
 "path": "res://Main/Editor/Actors/ActorKing.gd"
+}, {
+"base": "ActorKillable",
+"class": "ActorOracle",
+"language": "GDScript",
+"path": "res://Main/Editor/Actors/ActorOracle.gd"
 }, {
 "base": "Reference",
 "class": "CodeBlock",
@@ -89,6 +119,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Main/Editor/Goals/GoalNeckSafe.gd"
 }, {
+"base": "Node",
+"class": "QuantumWorld",
+"language": "GDScript",
+"path": "res://Main/Editor/WorldViewer/WorldScript.gd"
+}, {
 "base": "Object",
 "class": "SparseMatrix",
 "language": "GDScript",
@@ -104,11 +139,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Main/Editor/QuantumState/TimeState.gd"
 }, {
-"base": "Node",
-"class": "WORLD_CHARACTERS",
-"language": "GDScript",
-"path": "res://Main/Editor/Actors/WorldCharacters.gd"
-}, {
 "base": "ViewportContainer",
 "class": "WorldFrame",
 "language": "GDScript",
@@ -122,11 +152,17 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Actions": "",
 "Actor": "",
+"ActorBaron": "",
 "ActorCat": "",
+"ActorDishonestOracle": "",
+"ActorEnemy": "",
 "ActorGuard": "",
 "ActorGuardedKing": "",
+"ActorHonestOracle": "",
+"ActorIntroKing": "",
 "ActorKillable": "",
 "ActorKing": "",
+"ActorOracle": "",
 "CodeBlock": "",
 "CodeBlocks": "",
 "CodeColumn": "",
@@ -136,10 +172,10 @@ _global_script_class_icons={
 "Goal": "",
 "GoalNeck": "",
 "GoalNeckSafe": "",
+"QuantumWorld": "",
 "SparseMatrix": "",
 "StateVector": "",
 "TimeState": "",
-"WORLD_CHARACTERS": "",
 "WorldFrame": "",
 "WorldViewer": ""
 }
@@ -154,6 +190,7 @@ config/icon="res://Graphics/png/sword_square.png"
 [debug]
 
 gdscript/warnings/enable=false
+gdscript/completion/autocomplete_setters_and_getters=true
 gdscript/warnings/unsafe_property_access=true
 gdscript/warnings/unsafe_method_access=true
 gdscript/warnings/unsafe_cast=true

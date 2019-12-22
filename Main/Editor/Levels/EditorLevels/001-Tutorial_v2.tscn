@@ -1,0 +1,88 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Theme/main_theme.tres" type="Theme" id=1]
+[ext_resource path="res://Main/Editor/WorldViewer/TutorialWorldViewer.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Main/Editor/TutoralText.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Main/Editor/CodeArea/CodeArea.tscn" type="PackedScene" id=4]
+
+[sub_resource type="Shader" id=1]
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+
+[sub_resource type="GDScript" id=3]
+script/source = "extends Editor
+
+onready var tutorial_text = $CenterContainer/TutoralText
+var parallel_world_viewer:PackedScene = load(\"res://Main/Editor/WorldViewer/WorldViewer.tscn\")
+
+func _init().():
+	world_path = \"res://Main/Editor/Levels/WorldLevels/000-Tutorial.tscn\"
+	actors = [ActorIntroKing.new(0, 0, 0)]
+	initial_state_vector = PoolVector2Array([
+		Vector2(1,0), Vector2(0,0)])
+	blocks  = [CodeBlocks.CodeBlockID.SWORD]
+
+func _update_level_progress() -> void:
+	var probabilities := _get_final_probabilities()
+	footer_column.update_probabilities(probabilities) 
+	var is_every_condition_met := _get_is_every_condition_met(probabilities)
+	
+	match code_columns.get_state_count():
+		1:
+			tutorial_text.text = \"\"\"Great King! You have inherited one of the largest militaries in the land! Summon one of your soldiers to your presence by dragging one of the sword icons onto the timeline.\"\"\"
+		2:
+			tutorial_text.text = \"\"\"Oh, I should have mentioned: when summoned, these soldiers put their sword to the throat of anyone they see safe. This includes you, but it also includes your soldiers, so you can take care of this one with another one.\"\"\"
+		3:
+				tutorial_text.text = \"\"\"Ok that was fun, let's do it again!\"\"\"
+		4:
+				tutorial_text.text = \"Aaaaaah!\"
+		5:
+				tutorial_text.text = \"\"\"So you've got two states, danger and no danger,
+				your view is now split into dangerous and safe halves.\"\"\"
+		6:
+				tutorial_text.text = \"\"\"Ok, that's enoughs soldiers.
+				As the box at the end of the timeline says, the aim of this level is to be alive\"\"\"
+		7:
+				tutorial_text.text = \"\"\"Success! Press 'Complete Level'.\"\"\"
+		8:
+				tutorial_text.text = \"\"\"There are some goals in the bottom right corner.
+				Once all the goals are complete you can complete the level.\"\"\"
+	_update_continue_button(is_every_condition_met and code_columns.get_state_count() >= 6)
+
+
+func on_code_column_removed(column_id:int) -> void:
+	if (column_id + 1) <= current_time:
+		_ui_change_time(current_time-1)
+		_update_world_viewer_instant()"
+
+[node name="Editor" type="ColorRect"]
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+color = Color( 0.0470588, 0.0784314, 0.0627451, 1 )
+
+[node name="Main" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 0
+script = SubResource( 3 )
+
+[node name="WorldViewer" parent="Main" instance=ExtResource( 2 )]
+margin_bottom = 517.0
+
+[node name="CenterContainer" type="CenterContainer" parent="Main"]
+margin_top = 517.0
+margin_right = 1024.0
+margin_bottom = 572.0
+
+[node name="TutoralText" parent="Main/CenterContainer" instance=ExtResource( 3 )]
+margin_left = 312.0
+margin_top = 0.0
+margin_right = 712.0
+margin_bottom = 55.0
+rect_min_size = Vector2( 400, 55 )
+autowrap = true
+
+[node name="CodeArea" parent="Main" instance=ExtResource( 4 )]

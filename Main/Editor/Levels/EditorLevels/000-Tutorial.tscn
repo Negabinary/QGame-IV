@@ -30,21 +30,20 @@ func _update_level_progress() -> void:
 	
 	match stage:
 		1:
-			$TutoralText.text = \"Send a soldier in by dragging a sword icon to the timeline.\"
+			$TutoralText.text = \"\"\"Great King! You have inherited one of the largest militaries in the land! Summon one of your soldiers to your presence by dragging one of the sword icons onto the timeline.\"\"\"
 			if code_columns.get_state_count() == 2:
-				$TutoralText.text = \"\"\"Why did you do that? Now there's someone at your throat.
-				Send another soldier in to fix this.\"\"\"
+				$TutoralText.text = \"\"\"Oh, I should have mentioned: when summoned, these soldiers put their sword to the throat of anyone they see safe. This includes you, but it also includes your soldiers, so you can take care of this one with another one.\"\"\"
 				stage = 2
 		2:
 			if code_columns.get_state_count() == 3:
-				$TutoralText.text = \"\"\"Ok that was fun, let's do it again!\"\"\"
+				$TutoralText.text = \"\"\"Well that was thrilling, let's do it again!\"\"\"
 				stage = 3
 		3:
 			if code_columns.get_state_count() == 4:
 				$TutoralText.text = \"Aaaaaah!\"
 				stage = 4
 		4:
-			if code_columns.get_state_count() == 5:
+			if code_columns.get_state_count() == 10:
 				$TutoralText.text = \"\"\"So you've got two states, danger and no danger,
 				your view is now split into dangerous and safe halves.\"\"\"
 				stage = 5
@@ -55,7 +54,7 @@ func _update_level_progress() -> void:
 				new_world_viewer_instance.get_child(0).initialise_world_viewer(get_state_at_time(current_time-1), world_path, actors)
 				world_viewer = new_world_viewer_instance.get_child(0)
 		5:
-			if code_columns.get_state_count() == 6:
+			if code_columns.get_state_count() == 11:
 				$TutoralText.text = \"\"\"Ok, that's enoughs soldiers.
 				As the box at the end of the timeline says, the aim of this level is to be alive\"\"\"
 				stage = 6
@@ -71,7 +70,7 @@ func _update_level_progress() -> void:
 				$TutoralText.text = \"\"\"There are some goals in the bottom right corner.
 				Once all the goals are complete you can complete the level.\"\"\"
 				stage = 6
-	_update_continue_button(is_every_condition_met and stage >= 6)
+	_update_continue_button(is_every_condition_met and stage >= 10)
 
 
 func on_code_column_removed(column_id:int) -> void:
@@ -100,5 +99,6 @@ margin_bottom = 517.0
 margin_top = 517.0
 margin_bottom = 572.0
 rect_min_size = Vector2( 0, 55 )
+autowrap = true
 
 [node name="CodeArea" parent="Main" instance=ExtResource( 4 )]

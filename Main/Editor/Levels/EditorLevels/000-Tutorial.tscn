@@ -54,7 +54,7 @@ func _update_level_progress() -> void:
 				new_world_viewer_instance.get_child(0).initialise_world_viewer(get_state_at_time(current_time-1), world_path, actors)
 				world_viewer = new_world_viewer_instance.get_child(0)
 		5:
-			if code_columns.get_state_count() == 11:
+			if code_columns.get_state_count() == 12:
 				$TutoralText.text = \"\"\"Ok, that's enoughs soldiers.
 				As the box at the end of the timeline says, the aim of this level is to be alive\"\"\"
 				stage = 6
@@ -70,7 +70,7 @@ func _update_level_progress() -> void:
 				$TutoralText.text = \"\"\"There are some goals in the bottom right corner.
 				Once all the goals are complete you can complete the level.\"\"\"
 				stage = 6
-	_update_continue_button(is_every_condition_met and stage >= 10)
+	_update_continue_button(is_every_condition_met and stage >= 6)
 
 
 func on_code_column_removed(column_id:int) -> void:

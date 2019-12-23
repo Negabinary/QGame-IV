@@ -41,7 +41,7 @@ func _update_level_progress() -> void:
 				tutorial_text.text = \"\"\"So you've got two states, danger and no danger,
 				your view is now split into dangerous and safe halves.\"\"\"
 		6:
-				tutorial_text.text = \"\"\"Ok, that's enoughs soldiers.
+				tutorial_text.text = \"\"\"Ok, that's enough soldiers.
 				As the box at the end of the timeline says, the aim of this level is to be alive\"\"\"
 		7:
 				tutorial_text.text = \"\"\"Success! Press 'Complete Level'.\"\"\"

@@ -24,7 +24,6 @@ func set_picture(time_state:TimeState) -> void:
 		$B.show(); $A.hide()
 	
 	while $C.get_child_count() < floor(time / 2):
-		print("Hey!")
 		var d = $D.duplicate()
 		$C.add_child(d)
 		d.rect_position = Vector2(randf() * ($C.rect_size.x - d.rect_size.x), 0)

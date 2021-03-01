@@ -62,7 +62,7 @@ func get_world_probabilities():
 	return state_vector.get_world_probabilities()
 
 func get_actor_probability(actor_id):
-	assert actors[actor_id] is ActorKillable # No support for immortal characters here yet
+	assert (actors[actor_id] is ActorKillable) # No support for immortal characters here yet
 	var actor:ActorKillable = actors[actor_id]
 	return actor.get_neck_probability(state_vector)
 

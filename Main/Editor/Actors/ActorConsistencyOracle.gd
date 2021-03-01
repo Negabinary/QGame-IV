@@ -1,10 +1,12 @@
 extends ActorOracle
-class_name ActorDishonestOracle
+class_name ActorConsistencyOracle
 
 var qubit_id_brain
+var qubit_f_0
 
-func _init(actor_id, qubit_id_neck, qubit_id_brain, goal=-1).(actor_id, qubit_id_neck, goal):
+func _init(actor_id, qubit_id_neck, qubit_id_brain, qubit_f_0, goal=-1).(actor_id, qubit_id_neck, goal):
 	self.qubit_id_brain = qubit_id_brain
+	self.qubit_f_0 = qubit_f_0
 
 
 func get_actor_sprites(world_id:int, active:bool, code_block_array:Array) -> Array: #of Strings
@@ -26,7 +28,9 @@ func get_actor_sprites(world_id:int, active:bool, code_block_array:Array) -> Arr
 
 
 func _get_oracle_response(world_id:int) -> bool:
-	return false
+	var bit_brain = world_id | (1 << qubit_id_brain) == world_id 
+	var bit_f_0 = world_id | (1 << qubit_f_0) == world_id 
+	return bit_f_0 != bit_brain
 
 
 func _get_oracle_brain(world_id:int) -> bool:

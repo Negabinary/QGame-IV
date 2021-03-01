@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Theme/main_theme.tres" type="Theme" id=1]
 [ext_resource path="res://Main/LevelSelect/LevelSelect.gd" type="Script" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://Main/Editor/Levels/EditorLevels/050-Dishonest.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Main/Editor/Levels/EditorLevels/999-Test.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Main/Editor/Editor.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Main/Editor/Levels/EditorLevels/055-Deutsch.tscn" type="PackedScene" id=17]
 
 [node name="LevelSelect" type="ColorRect"]
 anchor_right = 1.0
@@ -125,11 +126,19 @@ text = "Dishonest"
 script = ExtResource( 3 )
 level_scene = ExtResource( 14 )
 
+[node name="Deutsch" type="Button" parent="VBoxContainer"]
+margin_top = 308.0
+margin_right = 100.0
+margin_bottom = 332.0
+text = "Deutsch"
+script = ExtResource( 3 )
+level_scene = ExtResource( 17 )
+
 [node name="G1" type="Button" parent="VBoxContainer"]
 visible = false
-margin_top = 252.0
+margin_top = 308.0
 margin_right = 100.0
-margin_bottom = 276.0
+margin_bottom = 332.0
 text = "Test"
 script = ExtResource( 3 )
 level_scene = ExtResource( 15 )
@@ -169,6 +178,7 @@ margin_bottom = 388.0
 disabled = true
 text = "Hadamard 1"
 script = ExtResource( 3 )
+level_scene = ExtResource( 17 )
 
 [node name="B1" type="Button" parent="VBoxContainer"]
 visible = false

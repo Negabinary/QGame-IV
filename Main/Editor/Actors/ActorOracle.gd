@@ -15,7 +15,6 @@ func filter_affected_worlds(affected_worlds:Array, code_block:CodeBlock) -> Arra
 
 func _filter_affected_worlds_consult_oracle(affected_worlds:Array) -> Array:
 	var filtered_worlds := []
-	print(affected_worlds)
 	for world_id in affected_worlds:
 		if _get_oracle_response(world_id):
 			filtered_worlds += [world_id]

@@ -7,7 +7,7 @@ func initialise_code_headers(actors:Array):
 		var header_instance = actor.get_icon().instance()
 		$VBoxContainer/VBoxContainer.add_child(header_instance)
 	
-	$VBoxContainer/Button.connect("toggled", self, "on_selected")
+	$VBoxContainer/Button.connect("pressed", self, "on_selected")
 
 
 func set_column_selected(new_state):
@@ -15,8 +15,8 @@ func set_column_selected(new_state):
 
 signal column_selected
 
-func on_selected(new_state):
-	if new_state == true:
+func on_selected():
+	if $VBoxContainer/Button.pressed == true:
 		emit_signal("column_selected", -1)
 	else:
 		$VBoxContainer/Button.pressed = true

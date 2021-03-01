@@ -32,7 +32,7 @@ func initialise(actors:Array, column_no:int) -> void:
 	set_column_no(column_no)
 	for actor in actors:
 		add_drop_area(actor)
-	$VBoxContainer/HBoxContainer/SelectButton.connect("toggled", self, "on_select_button_toggled")
+	$VBoxContainer/HBoxContainer/SelectButton.connect("pressed", self, "on_select_button_toggled")
 	$VBoxContainer/HBoxContainer/RemoveButton.connect("button_up", self, "on_column_to_be_removed")
 
 
@@ -116,8 +116,8 @@ func on_block_preview_end(actor_id):
 func on_column_to_be_removed():
 	emit_signal("column_to_be_removed", get_index())
 
-func on_select_button_toggled(new_state):
-	if new_state == true:
+func on_select_button_toggled():
+	if $VBoxContainer/HBoxContainer/SelectButton.pressed == true:
 		emit_signal("column_selected", get_index())
 	else:
 		$VBoxContainer/HBoxContainer/SelectButton.pressed = true

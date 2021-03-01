@@ -30,6 +30,11 @@ _global_script_classes=[ {
 "path": "res://Main/Editor/Actors/ActorCat.gd"
 }, {
 "base": "ActorOracle",
+"class": "ActorConsistencyOracle",
+"language": "GDScript",
+"path": "res://Main/Editor/Actors/ActorConsistencyOracle.gd"
+}, {
+"base": "ActorOracle",
 "class": "ActorDishonestOracle",
 "language": "GDScript",
 "path": "res://Main/Editor/Actors/ActorDishonestOracle.gd"
@@ -154,6 +159,7 @@ _global_script_class_icons={
 "Actor": "",
 "ActorBaron": "",
 "ActorCat": "",
+"ActorConsistencyOracle": "",
 "ActorDishonestOracle": "",
 "ActorEnemy": "",
 "ActorGuard": "",

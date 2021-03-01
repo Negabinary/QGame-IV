@@ -38,7 +38,7 @@ func multiply_vector(other:StateVector) -> StateVector:
 	for i in world_count:
 		result.append(Vector2(0, 0))
 	for z in range(world_count):
-		assert abs(world_vector[z].y) < 0.000001	# SparseMatrix not complex yet
+		assert (abs(world_vector[z].y) < 0.000001)	# SparseMatrix not complex yet
 		for y in columns[z]:
 			result[y] += Vector2(world_vector[z].x * columns[z][y], 0)
 	return StateVector.new(result)

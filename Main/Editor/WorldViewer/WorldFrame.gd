@@ -63,17 +63,20 @@ func adjust_anchor(bounds):
 func animate_anchor(bounds, new_frame_value):
 	var tween = $Tween
 	
-	anchor_left = bounds[0]
-	anchor_right = bounds[1]
-	anchor_top = bounds[2]
-	anchor_bottom = bounds[3]
-
-	tween.interpolate_property(self, "margin_left", margin_left, 1, ANIMATION_TIME, tween.TRANS_QUINT , tween.EASE_IN_OUT)
-	tween.interpolate_property(self, "margin_right", margin_right, -1, ANIMATION_TIME, tween.TRANS_QUINT , tween.EASE_IN_OUT)
-	tween.interpolate_property(self, "margin_top", margin_top, 1, ANIMATION_TIME, tween.TRANS_QUINT , tween.EASE_IN_OUT)
-	tween.interpolate_property(self, "margin_bottom", margin_bottom, -1, ANIMATION_TIME, tween.TRANS_QUINT , tween.EASE_IN_OUT)
+#	anchor_left = bounds[0]
+#	anchor_right = bounds[1]
+#	anchor_top = bounds[2]
+#	anchor_bottom = bounds[3]
 	
-	tween.interpolate_property(self, "margin_bottom", margin_bottom, -1, ANIMATION_TIME, tween.TRANS_QUINT , tween.EASE_IN_OUT)
+	tween.interpolate_property(self, "anchor_left", anchor_left, bounds[0], ANIMATION_TIME, tween.TRANS_QUINT , tween.EASE_IN_OUT)
+	tween.interpolate_property(self, "anchor_right", anchor_right, bounds[1], ANIMATION_TIME, tween.TRANS_QUINT , tween.EASE_IN_OUT)
+	tween.interpolate_property(self, "anchor_top", anchor_top, bounds[2], ANIMATION_TIME, tween.TRANS_QUINT , tween.EASE_IN_OUT)
+	tween.interpolate_property(self, "anchor_bottom", anchor_bottom, bounds[3], ANIMATION_TIME, tween.TRANS_QUINT , tween.EASE_IN_OUT)
+
+#	tween.interpolate_property(self, "margin_left", margin_left, 1, ANIMATION_TIME, tween.TRANS_QUINT , tween.EASE_IN_OUT)
+#	tween.interpolate_property(self, "margin_right", margin_right, -1, ANIMATION_TIME, tween.TRANS_QUINT , tween.EASE_IN_OUT)
+#	tween.interpolate_property(self, "margin_top", margin_top, 1, ANIMATION_TIME, tween.TRANS_QUINT , tween.EASE_IN_OUT)
+#	tween.interpolate_property(self, "margin_bottom", margin_bottom, -1, ANIMATION_TIME, tween.TRANS_QUINT , tween.EASE_IN_OUT)
 	
 	tween.interpolate_property(self, "frame_value", frame_value, new_frame_value, ANIMATION_TIME, tween.TRANS_QUINT, tween.EASE_IN_OUT)
 	

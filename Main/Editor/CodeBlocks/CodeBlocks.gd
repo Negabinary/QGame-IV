@@ -26,6 +26,8 @@ static func new_code_block(code_block_id:int = -1) -> CodeBlock:
 			return CodeBlockConfidentScout.new()
 		4:
 			return CodeBlockConsultOracle.new()
+		_:
+			return CodeBlockNull.new()
 
 
 class CodeBlockNull:

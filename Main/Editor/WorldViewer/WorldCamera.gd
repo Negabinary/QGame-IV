@@ -4,6 +4,7 @@ extends Camera2D
 var viewport_size : Vector2
 export (Vector2) var scene_size = Vector2(0, 0)
 
+
 func initialise(vp_size):
 	viewport_size = vp_size
 	update_size()

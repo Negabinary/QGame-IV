@@ -9,8 +9,12 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="b" type="Viewport" parent="."]
+own_world = true
 handle_input_locally = false
 disable_3d = true
 usage = 0

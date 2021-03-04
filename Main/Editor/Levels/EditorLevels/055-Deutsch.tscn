@@ -21,7 +21,7 @@ func _init().():
 			Vector2(sqrt(0.25),0), Vector2(0,0), Vector2(0.0,0), Vector2(0.0,0),
 			Vector2(0.0,0), Vector2(sqrt(0.25),0), Vector2(0.0,0), Vector2(0.0,0)])
 	blocks  = [CODE_BLOCKS.SWORD, CODE_BLOCKS.TIMID_SCOUT, CODE_BLOCKS.CONFIDENT_SCOUT, CODE_BLOCKS.HADAMARD, CODE_BLOCKS.CONSULT_ORACLE]
-	actors = [ActorKing.new(0, 0, 0), ActorConsistencyOracle.new(1, 1, 2, 3, -1)]
+	actors = [ActorKing.new(0, 0, 0), ActorConsistencyOracle.new(1, 1, 2, 3, 0)]
 "
 
 [node name="Editor" type="ColorRect"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Main/Editor/WorldViewer/WorldScript.gd" type="Script" id=1]
 [ext_resource path="res://Main/Editor/WorldViewer/WorldCamera.gd" type="Script" id=2]
@@ -8,6 +8,10 @@
 [ext_resource path="res://Graphics/King/no.png" type="Texture" id=6]
 [ext_resource path="res://Graphics/King/good_fortune.png" type="Texture" id=7]
 [ext_resource path="res://Graphics/King/bad_fortune.png" type="Texture" id=8]
+[ext_resource path="res://Graphics/King/f_nx.png" type="Texture" id=9]
+[ext_resource path="res://Graphics/King/f_0.png" type="Texture" id=10]
+[ext_resource path="res://Graphics/King/f_1.png" type="Texture" id=11]
+[ext_resource path="res://Graphics/King/f_x.png" type="Texture" id=12]
 
 [sub_resource type="StreamTexture" id=1]
 flags = 4
@@ -64,7 +68,23 @@ visible = false
 texture = SubResource( 5 )
 
 [node name="Oracle" type="Node2D" parent="Characters"]
-position = Vector2( 340.112, -8.30995 )
+position = Vector2( 121.198, 7.70812 )
+
+[node name="F0" type="Sprite" parent="Characters/Oracle"]
+position = Vector2( 414.502, -105.23 )
+texture = ExtResource( 10 )
+
+[node name="F1" type="Sprite" parent="Characters/Oracle"]
+position = Vector2( 414.502, -105.23 )
+texture = ExtResource( 11 )
+
+[node name="FNX" type="Sprite" parent="Characters/Oracle"]
+position = Vector2( 414.502, -105.23 )
+texture = ExtResource( 9 )
+
+[node name="FX" type="Sprite" parent="Characters/Oracle"]
+position = Vector2( 414.502, -105.23 )
+texture = ExtResource( 12 )
 
 [node name="On" type="Sprite" parent="Characters/Oracle"]
 position = Vector2( -88, 24 )
